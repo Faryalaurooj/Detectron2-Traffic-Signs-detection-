@@ -1,0 +1,2658 @@
+(detectron2) caic@caic:~/Downloads/train-object-detector-detectron2$ python train.py --device gpu --learning-rate 0.00001 --iterations 6000
+Loading config /home/caic/Downloads/train-object-detector-detectron2/detectron2/detectron2/model_zoo/configs/COCO-Detection/../Base-RetinaNet.yaml with yaml.unsafe_load. Your machine may be at risk if the file contains malicious content.
+[10/27 01:25:12 d2.engine.defaults]: Model:
+RetinaNet(
+  (backbone): FPN(
+    (fpn_lateral3): Conv2d(512, 256, kernel_size=(1, 1), stride=(1, 1))
+    (fpn_output3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (fpn_lateral4): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1))
+    (fpn_output4): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (fpn_lateral5): Conv2d(2048, 256, kernel_size=(1, 1), stride=(1, 1))
+    (fpn_output5): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (top_block): LastLevelP6P7(
+      (p6): Conv2d(2048, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+      (p7): Conv2d(256, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    )
+    (bottom_up): ResNet(
+      (stem): BasicStem(
+        (conv1): Conv2d(
+          3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False
+          (norm): FrozenBatchNorm2d(num_features=64, eps=1e-05)
+        )
+      )
+      (res2): Sequential(
+        (0): BottleneckBlock(
+          (shortcut): Conv2d(
+            64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv1): Conv2d(
+            64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=64, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=64, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+        )
+        (1): BottleneckBlock(
+          (conv1): Conv2d(
+            256, 64, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=64, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=64, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+        )
+        (2): BottleneckBlock(
+          (conv1): Conv2d(
+            256, 64, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=64, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=64, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+        )
+      )
+      (res3): Sequential(
+        (0): BottleneckBlock(
+          (shortcut): Conv2d(
+            256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+          (conv1): Conv2d(
+            256, 128, kernel_size=(1, 1), stride=(2, 2), bias=False
+            (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+        )
+        (1): BottleneckBlock(
+          (conv1): Conv2d(
+            512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+        )
+        (2): BottleneckBlock(
+          (conv1): Conv2d(
+            512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+        )
+        (3): BottleneckBlock(
+          (conv1): Conv2d(
+            512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+        )
+      )
+      (res4): Sequential(
+        (0): BottleneckBlock(
+          (shortcut): Conv2d(
+            512, 1024, kernel_size=(1, 1), stride=(2, 2), bias=False
+            (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+          )
+          (conv1): Conv2d(
+            512, 256, kernel_size=(1, 1), stride=(2, 2), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+          )
+        )
+        (1): BottleneckBlock(
+          (conv1): Conv2d(
+            1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+          )
+        )
+        (2): BottleneckBlock(
+          (conv1): Conv2d(
+            1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+          )
+        )
+        (3): BottleneckBlock(
+          (conv1): Conv2d(
+            1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+          )
+        )
+        (4): BottleneckBlock(
+          (conv1): Conv2d(
+            1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+          )
+        )
+        (5): BottleneckBlock(
+          (conv1): Conv2d(
+            1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+          )
+        )
+        (6): BottleneckBlock(
+          (conv1): Conv2d(
+            1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+          )
+        )
+        (7): BottleneckBlock(
+          (conv1): Conv2d(
+            1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+          )
+        )
+        (8): BottleneckBlock(
+          (conv1): Conv2d(
+            1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+          )
+        )
+        (9): BottleneckBlock(
+          (conv1): Conv2d(
+            1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+          )
+        )
+        (10): BottleneckBlock(
+          (conv1): Conv2d(
+            1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+          )
+        )
+        (11): BottleneckBlock(
+          (conv1): Conv2d(
+            1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+          )
+        )
+        (12): BottleneckBlock(
+          (conv1): Conv2d(
+            1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+          )
+        )
+        (13): BottleneckBlock(
+          (conv1): Conv2d(
+            1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+          )
+        )
+        (14): BottleneckBlock(
+          (conv1): Conv2d(
+            1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+          )
+        )
+        (15): BottleneckBlock(
+          (conv1): Conv2d(
+            1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+          )
+        )
+        (16): BottleneckBlock(
+          (conv1): Conv2d(
+            1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+          )
+        )
+        (17): BottleneckBlock(
+          (conv1): Conv2d(
+            1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+          )
+        )
+        (18): BottleneckBlock(
+          (conv1): Conv2d(
+            1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+          )
+        )
+        (19): BottleneckBlock(
+          (conv1): Conv2d(
+            1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+          )
+        )
+        (20): BottleneckBlock(
+          (conv1): Conv2d(
+            1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+          )
+        )
+        (21): BottleneckBlock(
+          (conv1): Conv2d(
+            1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+          )
+        )
+        (22): BottleneckBlock(
+          (conv1): Conv2d(
+            1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+          )
+        )
+      )
+      (res5): Sequential(
+        (0): BottleneckBlock(
+          (shortcut): Conv2d(
+            1024, 2048, kernel_size=(1, 1), stride=(2, 2), bias=False
+            (norm): FrozenBatchNorm2d(num_features=2048, eps=1e-05)
+          )
+          (conv1): Conv2d(
+            1024, 512, kernel_size=(1, 1), stride=(2, 2), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=2048, eps=1e-05)
+          )
+        )
+        (1): BottleneckBlock(
+          (conv1): Conv2d(
+            2048, 512, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=2048, eps=1e-05)
+          )
+        )
+        (2): BottleneckBlock(
+          (conv1): Conv2d(
+            2048, 512, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=2048, eps=1e-05)
+          )
+        )
+      )
+    )
+  )
+  (head): RetinaNetHead(
+    (cls_subnet): Sequential(
+      (0): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU()
+      (2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (3): ReLU()
+      (4): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (5): ReLU()
+      (6): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (7): ReLU()
+    )
+    (bbox_subnet): Sequential(
+      (0): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU()
+      (2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (3): ReLU()
+      (4): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (5): ReLU()
+      (6): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (7): ReLU()
+    )
+    (cls_score): Conv2d(256, 720, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (bbox_pred): Conv2d(256, 36, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+  )
+  (anchor_generator): DefaultAnchorGenerator(
+    (cell_anchors): BufferList()
+  )
+)
+[10/27 01:25:19 d2.data.build]: Removed 0 images with no usable annotations. 741 images left.
+[10/27 01:25:19 d2.data.build]: Distribution of instances among all 4 categories:
+|  category   | #instances   |  category  | #instances   |  category  | #instances   |
+|:-----------:|:-------------|:----------:|:-------------|:----------:|:-------------|
+| prohibitory | 557          |   danger   | 219          | mandatory  | 163          |
+|    othe     | 274          |            |              |            |              |
+|    total    | 1213         |            |              |            |              |
+[10/27 01:25:19 d2.data.dataset_mapper]: [DatasetMapper] Augmentations used in training: [ResizeShortestEdge(short_edge_length=(640, 672, 704, 736, 768, 800), max_size=1333, sample_style='choice'), RandomFlip()]
+[10/27 01:25:19 d2.data.build]: Using training sampler TrainingSampler
+[10/27 01:25:19 d2.data.common]: Serializing the dataset using: <class 'detectron2.data.common._TorchSerializedList'>
+[10/27 01:25:19 d2.data.common]: Serializing 741 elements to byte tensors and concatenating them all ...
+[10/27 01:25:19 d2.data.common]: Serialized dataset takes 0.16 MiB
+
+(detectron2) caic@caic:~/Downloads/train-object-detector-detectron2$ python predict.py
+Loading config /home/caic/Downloads/train-object-detector-detectron2/detectron2/detectron2/model_zoo/configs/COCO-Detection/../Base-RetinaNet.yaml with yaml.unsafe_load. Your machine may be at risk if the file contains malicious content.
+/home/caic/.local/lib/python3.8/site-packages/torch/functional.py:504: UserWarning: torch.meshgrid: in an upcoming release, it will be required to pass the indexing argument. (Triggered internally at ../aten/src/ATen/native/TensorShape.cpp:3483.)
+  return _VF.meshgrid(tensors, **kwargs)  # type: ignore[attr-defined]
+{'instances': Instances(num_instances=16, image_height=800, image_width=1360, fields=[pred_boxes: Boxes(tensor([[ 804.3439,  477.4847,  833.0598,  506.8174],
+        [1061.4645,  379.6187, 1093.5260,  410.1578],
+        [1069.6439,  407.7300, 1090.2839,  428.5971],
+        [1069.6439,  407.7300, 1090.2839,  428.5971],
+        [1069.6439,  407.7300, 1090.2839,  428.5971],
+        [1065.5698,  392.1289, 1091.3179,  418.8024],
+        [1061.0068,  379.7469, 1093.7111,  409.8436],
+        [1065.1139,  392.9230, 1091.9116,  418.0558],
+        [ 426.9280,  501.3094,  442.4149,  521.6599],
+        [ 587.6722,  479.1681,  603.4875,  495.8416],
+        [1059.4493,  379.1209, 1093.1265,  409.6964],
+        [1069.6439,  407.7300, 1090.2839,  428.5971],
+        [ 585.1047,  488.2124,  599.8127,  502.6362],
+        [1069.9080,  417.2337, 1087.6885,  433.6734],
+        [ 587.4423,  474.7417,  603.2498,  493.0365],
+        [ 426.9280,  501.3094,  442.4149,  521.6599]])), scores: tensor([0.9458, 0.8845, 0.6573, 0.5207, 0.3366, 0.2423, 0.1472, 0.1198, 0.0907,
+        0.0861, 0.0822, 0.0687, 0.0615, 0.0570, 0.0554, 0.0507]), pred_classes: tensor([2, 3, 0, 2, 3, 3, 0, 0, 3, 2, 1, 1, 2, 2, 1, 2])])}
+        
+   
+  (detectron2) caic@caic:~/Downloads/train-object-detector-detectron2$ python predict.py
+Loading config /home/caic/Downloads/train-object-detector-detectron2/detectron2/detectron2/model_zoo/configs/COCO-Detection/../Base-RetinaNet.yaml with yaml.unsafe_load. Your machine may be at risk if the file contains malicious content.
+/home/caic/.local/lib/python3.8/site-packages/torch/functional.py:504: UserWarning: torch.meshgrid: in an upcoming release, it will be required to pass the indexing argument. (Triggered internally at ../aten/src/ATen/native/TensorShape.cpp:3483.)
+  return _VF.meshgrid(tensors, **kwargs)  # type: ignore[attr-defined]
+{'instances': Instances(num_instances=1, image_height=800, image_width=1360, fields=[pred_boxes: Boxes(tensor([[1077.3163,  141.7477, 1166.6633,  229.7746]])), scores: tensor([0.9989]), pred_classes: tensor([0])])}
+00860
+['0', '0.8242647058823529', '0.23125', '0.06544117647058824', '0.11']
+{'instances': Instances(num_instances=2, image_height=800, image_width=1360, fields=[pred_boxes: Boxes(tensor([[863.3307, 482.2745, 920.6382, 533.2576],
+        [862.3257, 481.5879, 920.6250, 533.5305]])), scores: tensor([0.9956, 0.0776]), pred_classes: tensor([1, 3])])}
+00899
+['1', '0.6551470588235294', '0.63375', '0.04191176470588235', '0.06375']
+{'instances': Instances(num_instances=17, image_height=800, image_width=1360, fields=[pred_boxes: Boxes(tensor([[ 978.5349,  333.1594, 1010.5735,  365.5128],
+        [ 992.7749,  382.6991, 1007.3533,  397.7653],
+        [ 347.4969,  515.8345,  362.4913,  529.5972],
+        [ 659.0547,  178.6254,  682.6287,  203.6596],
+        [ 992.9014,  381.3641, 1008.4732,  396.9509],
+        [ 356.6705,  473.9312,  367.5020,  488.5890],
+        [ 297.5882,  462.0896,  310.7014,  481.6461],
+        [ 662.8211,  498.4236,  678.5941,  514.8988],
+        [ 338.2036,  516.5497,  354.2000,  530.7401],
+        [ 388.0743,  480.5992,  398.6339,  492.6743],
+        [1051.5106,  422.0099, 1066.0228,  440.2997],
+        [1051.7937,  421.9811, 1066.2158,  440.1296],
+        [ 381.9724,  480.4517,  392.2268,  492.6051],
+        [ 589.7984,  501.7503,  614.8694,  517.4730],
+        [ 292.0667,  485.1740,  306.1211,  499.2074],
+        [ 355.3669,  510.6437,  368.5223,  523.5047],
+        [ 295.8283,  472.7765,  309.0530,  488.2390]])), scores: tensor([0.9021, 0.1172, 0.0994, 0.0956, 0.0882, 0.0789, 0.0740, 0.0698, 0.0612,
+        0.0592, 0.0583, 0.0547, 0.0540, 0.0532, 0.0524, 0.0504, 0.0501]), pred_classes: tensor([3, 0, 2, 3, 3, 0, 1, 2, 2, 0, 2, 3, 0, 2, 0, 2, 1])])}
+00844
+['3', '0.7308823529411764', '0.43625', '0.023529411764705882', '0.04']
+{'instances': Instances(num_instances=6, image_height=800, image_width=1360, fields=[pred_boxes: Boxes(tensor([[ 300.3080,  532.7571,  340.9083,  574.4130],
+        [ 985.5708,  504.7296, 1028.2716,  546.3859],
+        [ 283.4605,  533.3203,  329.7410,  576.0983],
+        [ 274.1067,  533.9648,  303.1090,  576.1594],
+        [ 824.6020,  583.2397,  835.7957,  599.9465],
+        [ 667.2173,  600.9688,  682.6581,  613.3718]])), scores: tensor([0.9241, 0.7603, 0.5299, 0.3527, 0.0769, 0.0672]), pred_classes: tensor([3, 3, 3, 3, 0, 2])])}
+00879
+['3', '0.23529411764705882', '0.69125', '0.029411764705882353', '0.0525']
+['3', '0.7397058823529412', '0.65625', '0.03161764705882353', '0.0525']
+['3', '0.225', '0.6925', '0.033823529411764704', '0.05375']
+{'instances': Instances(num_instances=12, image_height=800, image_width=1360, fields=[pred_boxes: Boxes(tensor([[ 441.3700,  416.6403,  471.2614,  446.6962],
+        [1068.4224,  381.4986, 1097.4758,  411.8721],
+        [ 427.7408,  436.8491,  443.4169,  452.0183],
+        [ 433.7164,  446.1887,  448.9797,  460.3954],
+        [ 431.8256,  437.8094,  450.6398,  455.6858],
+        [ 621.8699,  486.1143,  643.2903,  501.1933],
+        [ 693.9807,  480.3823,  710.2959,  496.9398],
+        [ 438.8925,  444.2168,  455.9478,  460.0884],
+        [ 426.2521,  424.6952,  443.8105,  444.0696],
+        [ 359.9909,  505.2255,  369.6940,  520.2675],
+        [ 433.7213,  451.3507,  447.6109,  463.9314],
+        [ 444.3688,  440.7599,  464.5073,  459.5215]])), scores: tensor([0.9801, 0.9676, 0.1917, 0.1806, 0.1402, 0.1061, 0.0883, 0.0806, 0.0775,
+        0.0727, 0.0577, 0.0509]), pred_classes: tensor([0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0])])}
+00838
+['0', '0.3352941176470588', '0.53875', '0.022058823529411766', '0.0375']
+['0', '0.7955882352941176', '0.495', '0.021323529411764706', '0.0375']
+{'instances': Instances(num_instances=8, image_height=800, image_width=1360, fields=[pred_boxes: Boxes(tensor([[ 999.8783,  253.3977, 1110.8209,  371.6832],
+        [ 552.8348,  398.5477,  576.0709,  421.6775],
+        [ 526.0641,  166.0761,  577.7515,  251.1071],
+        [1000.6078,  255.6005, 1109.8237,  370.8048],
+        [1000.9648,  255.2689, 1110.6903,  370.5934],
+        [ 182.9787,  474.7430,  207.8940,  496.6932],
+        [1000.9648,  255.2689, 1110.6903,  370.5934],
+        [ 553.0770,  398.9455,  576.1762,  422.0181]])), scores: tensor([0.9921, 0.8203, 0.2027, 0.1562, 0.1559, 0.1380, 0.1018, 0.0662]), pred_classes: tensor([3, 0, 1, 1, 0, 2, 2, 3])])}
+00829
+['3', '0.775', '0.39', '0.08161764705882353', '0.1475']
+['0', '0.4147058823529412', '0.51125', '0.01764705882352941', '0.02875']
+{'instances': Instances(num_instances=7, image_height=800, image_width=1360, fields=[pred_boxes: Boxes(tensor([[1128.9200,  262.5830, 1188.1266,  323.3735],
+        [1237.4408,  383.7243, 1284.0343,  468.6777],
+        [1237.5063,  384.5633, 1283.5054,  467.7792],
+        [ 580.1061,  390.6710,  605.3024,  416.5913],
+        [1023.0486,  453.4080, 1037.4722,  468.1710],
+        [ 725.1968,  483.3029,  742.6755,  500.3459],
+        [ 783.5978,  471.8610,  798.0833,  489.0962]])), scores: tensor([0.9964, 0.1539, 0.0852, 0.0559, 0.0536, 0.0513, 0.0502]), pred_classes: tensor([0, 1, 3, 2, 0, 2, 0])])}
+00834
+['0', '0.8514705882352941', '0.365', '0.04411764705882353', '0.07625']
+{'instances': Instances(num_instances=9, image_height=800, image_width=1360, fields=[pred_boxes: Boxes(tensor([[ 301.3547,  362.0452,  345.8135,  408.3877],
+        [1232.8630,  294.6037, 1277.7670,  342.8722],
+        [1233.4055,  341.6092, 1278.9625,  389.6965],
+        [ 304.3304,  406.6613,  347.6384,  453.3192],
+        [1233.7310,  315.7712, 1280.5487,  369.9244],
+        [ 303.0524,  381.5966,  349.0694,  432.7996],
+        [ 654.0355,  493.9651,  673.7728,  510.8562],
+        [ 633.5848,  495.8807,  650.9766,  510.9802],
+        [ 647.9799,  494.4061,  664.1174,  510.5786]])), scores: tensor([0.9972, 0.9966, 0.9960, 0.9955, 0.7502, 0.6578, 0.1616, 0.0734, 0.0610]), pred_classes: tensor([0, 0, 0, 0, 0, 0, 2, 2, 2])])}
+00839
+['0', '0.2375', '0.48125', '0.03235294117647059', '0.0575']
+['0', '0.9220588235294118', '0.3975', '0.03308823529411765', '0.06']
+['0', '0.9227941176470589', '0.45625', '0.03308823529411765', '0.06']
+['0', '0.23897058823529413', '0.53625', '0.03161764705882353', '0.05875']
+['0', '0.9235294117647059', '0.4275', '0.03455882352941177', '0.0675']
+['0', '0.23970588235294119', '0.5075', '0.033823529411764704', '0.06375']
+{'instances': Instances(num_instances=11, image_height=800, image_width=1360, fields=[pred_boxes: Boxes(tensor([[1090.6899,  311.1309, 1145.7550,  366.3771],
+        [ 285.3064,  310.3495,  355.5051,  383.1036],
+        [ 763.9327,  494.4553,  778.6147,  514.4911],
+        [ 752.1930,  498.2319,  767.7733,  516.0933],
+        [ 763.9327,  494.4553,  778.6147,  514.4911],
+        [ 709.4528,  440.2120,  726.2779,  458.9891],
+        [1115.7329,  368.9937, 1137.3911,  390.9174],
+        [ 763.9327,  494.4553,  778.6147,  514.4911],
+        [ 709.4528,  440.2120,  726.2779,  458.9891],
+        [ 752.1930,  498.2319,  767.7733,  516.0933],
+        [ 752.1930,  498.2319,  767.7733,  516.0933]])), scores: tensor([0.9995, 0.7059, 0.0923, 0.0810, 0.0797, 0.0659, 0.0592, 0.0562, 0.0554,
+        0.0538, 0.0519]), pred_classes: tensor([0, 1, 2, 2, 3, 2, 0, 0, 3, 3, 0])])}
+00851
+['0', '0.8213235294117647', '0.4225', '0.04044117647058824', '0.06875']
+['1', '0.23529411764705882', '0.4325', '0.051470588235294115', '0.09125']
+{'instances': Instances(num_instances=17, image_height=800, image_width=1360, fields=[pred_boxes: Boxes(tensor([[858.5743, 381.5497, 931.4777, 449.6143],
+        [785.2447, 508.2306, 800.5606, 522.4985],
+        [808.3422, 502.3549, 830.2062, 520.8828],
+        [788.7444, 510.9642, 803.8661, 526.6733],
+        [517.9532, 508.7056, 535.7060, 528.8791],
+        [789.0406, 503.1898, 804.6412, 516.8726],
+        [744.1368, 513.0798, 762.9887, 529.4925],
+        [801.7934, 505.5099, 818.3757, 521.7499],
+        [519.3502, 517.5050, 538.4446, 544.9144],
+        [782.3304, 511.5593, 796.4928, 527.3300],
+        [799.6566, 514.0151, 814.7783, 529.6572],
+        [715.9518, 511.3936, 736.6659, 529.4321],
+        [518.1492, 508.2255, 534.9767, 526.8396],
+        [794.6403, 517.3457, 809.2081, 534.3751],
+        [530.8486, 510.5857, 545.3787, 533.9146],
+        [805.1790, 508.5676, 823.9119, 525.9205],
+        [784.9524, 515.3381, 799.3736, 531.8608]])), scores: tensor([0.9923, 0.2081, 0.1756, 0.1549, 0.1517, 0.1417, 0.1214, 0.1079, 0.1077,
+        0.0933, 0.0756, 0.0559, 0.0537, 0.0511, 0.0510, 0.0506, 0.0504]), pred_classes: tensor([1, 2, 2, 2, 0, 2, 2, 2, 0, 2, 2, 2, 2, 2, 0, 2, 2])])}
+00828
+['1', '0.6573529411764706', '0.51875', '0.05367647058823529', '0.085']
+{'instances': Instances(num_instances=10, image_height=800, image_width=1360, fields=[pred_boxes: Boxes(tensor([[ 821.5768,  482.1442,  848.4088,  509.3614],
+        [1338.2914,  557.1872, 1358.5455,  580.5659],
+        [1338.2914,  557.1872, 1358.5455,  580.5659],
+        [1165.6256,  564.7344, 1194.0089,  593.6066],
+        [1338.2914,  557.1872, 1358.5455,  580.5659],
+        [1338.2914,  557.1872, 1358.5455,  580.5659],
+        [1295.3682,  586.2208, 1312.9738,  604.0500],
+        [  76.2257,  584.4543,   87.4524,  598.8747],
+        [1165.6256,  564.7344, 1194.0089,  593.6066],
+        [ 820.5483,  482.2989,  848.5789,  509.6935]])), scores: tensor([0.6062, 0.3205, 0.1170, 0.1155, 0.1101, 0.1086, 0.0988, 0.0935, 0.0824,
+        0.0552]), pred_classes: tensor([3, 3, 2, 3, 0, 1, 2, 0, 1, 1])])}
+00893
+['3', '0.6132352941176471', '0.61875', '0.019852941176470587', '0.03375']
+{'instances': Instances(num_instances=8, image_height=800, image_width=1360, fields=[pred_boxes: Boxes(tensor([[919.3666, 438.9954, 960.1556, 483.2419],
+        [538.1476, 472.6189, 567.9656, 509.0535],
+        [174.6793, 335.7563, 256.4265, 400.5509],
+        [175.4528, 334.8842, 256.4409, 400.0245],
+        [918.8672, 438.2863, 959.8816, 482.8120],
+        [918.8672, 438.2863, 959.8816, 482.8120],
+        [207.3988, 468.8092, 223.3993, 486.7832],
+        [918.8672, 438.2863, 959.8816, 482.8120]])), scores: tensor([0.9849, 0.9192, 0.2268, 0.1434, 0.0827, 0.0737, 0.0673, 0.0540]), pred_classes: tensor([ 3,  2,  1,  3,  1, 19,  0,  2])])}
+00827
+['3', '0.6904411764705882', '0.575', '0.030147058823529412', '0.05625']
+['2', '0.40588235294117647', '0.6125', '0.021323529411764706', '0.04625']
+{'instances': Instances(num_instances=6, image_height=800, image_width=1360, fields=[pred_boxes: Boxes(tensor([[ 965.7083,  415.6341, 1014.9792,  464.5565],
+        [ 191.2304,  481.4687,  237.2427,  528.2994],
+        [ 542.9241,  601.5692,  561.4114,  616.9899],
+        [1054.2080,  573.3303, 1083.6750,  597.0831],
+        [ 186.9531,  526.0561,  211.7555,  547.1019],
+        [1054.2080,  573.3303, 1083.6750,  597.0831]])), scores: tensor([0.9973, 0.9951, 0.1884, 0.0961, 0.0770, 0.0674]), pred_classes: tensor([0, 0, 2, 1, 0, 2])])}
+00895
+['0', '0.7272058823529411', '0.54875', '0.03602941176470588', '0.06125']
+['0', '0.15735294117647058', '0.63', '0.033823529411764704', '0.05875']
+{'instances': Instances(num_instances=5, image_height=800, image_width=1360, fields=[pred_boxes: Boxes(tensor([[1100.7563,  387.8241, 1168.9374,  451.8497],
+        [ 118.6533,  423.3938,  178.7441,  482.0136],
+        [ 118.7663,  424.2171,  178.6136,  481.9837],
+        [ 118.8812,  423.2843,  177.7229,  482.0218],
+        [1100.6514,  387.2850, 1168.6091,  452.0496]])), scores: tensor([0.9796, 0.9398, 0.0817, 0.0589, 0.0521]), pred_classes: tensor([ 1,  1, 23, 58, 23])])}
+00867
+['1', '0.8338235294117647', '0.52375', '0.05', '0.08']
+['1', '0.10882352941176471', '0.565', '0.04411764705882353', '0.07375']
+{'instances': Instances(num_instances=22, image_height=800, image_width=1360, fields=[pred_boxes: Boxes(tensor([[ 989.1786,  315.3316, 1042.4996,  369.1185],
+        [ 780.3935,  546.0645,  802.2599,  567.5594],
+        [ 793.3304,  578.1793,  812.2857,  597.1738],
+        [ 779.8948,  540.6338,  798.4989,  559.6921],
+        [   2.0384,  604.2042,   17.2422,  622.9832],
+        [ 780.3935,  546.0645,  802.2599,  567.5594],
+        [ 225.4425,  525.9094,  267.2223,  556.0405],
+        [ 230.8532,  533.9780,  258.1166,  558.7107],
+        [ 223.6362,  543.3718,  236.8997,  563.0328],
+        [ 989.0843,  314.0232, 1042.0669,  368.0769],
+        [ 782.0241,  536.9197,  799.7596,  553.5800],
+        [ 780.3935,  546.0645,  802.2599,  567.5594],
+        [ 225.6888,  536.1147,  246.0129,  560.4029],
+        [ 780.3935,  546.0645,  802.2599,  567.5594],
+        [ 772.7130,  538.5778,  803.2762,  571.3242],
+        [ 251.0710,  540.8625,  268.5152,  559.3627],
+        [ 217.2432,  539.8022,  235.5300,  561.6594],
+        [1038.4806,  596.1663, 1052.1047,  615.4181],
+        [1038.4806,  596.1663, 1052.1047,  615.4181],
+        [ 222.1139,  539.0804,  238.5490,  561.3596],
+        [ 782.5696,  553.7792,  803.3828,  574.1699],
+        [ 225.6888,  536.1147,  246.0129,  560.4029]])), scores: tensor([0.9980, 0.6240, 0.2282, 0.2114, 0.1229, 0.1141, 0.1079, 0.1028, 0.0797,
+        0.0782, 0.0741, 0.0735, 0.0724, 0.0672, 0.0651, 0.0637, 0.0610, 0.0535,
+        0.0528, 0.0526, 0.0507, 0.0504]), pred_classes: tensor([2, 3, 2, 3, 0, 0, 1, 1, 0, 3, 3, 2, 1, 1, 3, 1, 0, 3, 0, 1, 3, 0])])}
+00888
+['2', '0.7463235294117647', '0.4275', '0.03897058823529412', '0.0675']
+['3', '0.5816176470588236', '0.695', '0.016176470588235296', '0.02625']
+{'instances': Instances(num_instances=6, image_height=800, image_width=1360, fields=[pred_boxes: Boxes(tensor([[ 231.7284,  414.2059,  266.8474,  450.0394],
+        [ 232.0756,  414.0847,  267.3519,  449.8004],
+        [ 232.0756,  414.0847,  267.3519,  449.8004],
+        [ 987.0607,  466.9659, 1101.8866,  513.1325],
+        [ 232.0756,  414.0847,  267.3519,  449.8004],
+        [ 232.0756,  414.0847,  267.3519,  449.8004]])), scores: tensor([0.9261, 0.1756, 0.1163, 0.0895, 0.0706, 0.0627]), pred_classes: tensor([ 0,  3, 47,  2, 32,  2])])}
+00824
+['0', '0.18235294117647058', '0.54', '0.025735294117647058', '0.045']
+{'instances': Instances(num_instances=12, image_height=800, image_width=1360, fields=[pred_boxes: Boxes(tensor([[ 805.3947,  410.5096,  845.7413,  451.2624],
+        [ 531.9664,  551.6947,  541.9129,  565.2141],
+        [ 403.1181,  601.8707,  429.5779,  619.0852],
+        [ 609.0094,  593.5742,  630.7966,  616.6155],
+        [ 805.6087,  410.2951,  845.6603,  451.0018],
+        [1052.1410,  575.3089, 1082.2861,  599.1218],
+        [ 532.0468,  551.7672,  541.8230,  565.5961],
+        [1053.8457,  575.4462, 1082.3097,  598.5096],
+        [ 532.0468,  551.7672,  541.8230,  565.5961],
+        [ 450.5796,  594.5023,  471.9677,  612.1723],
+        [ 524.2695,  585.9283,  541.4091,  599.7776],
+        [ 588.8812,  554.0804,  597.8586,  566.2095]])), scores: tensor([0.9794, 0.1504, 0.1283, 0.1032, 0.1019, 0.1009, 0.0702, 0.0676, 0.0626,
+        0.0578, 0.0553, 0.0547]), pred_classes: tensor([0, 0, 2, 2, 3, 1, 3, 3, 9, 2, 2, 0])])}
+00896
+['0', '0.6066176470588235', '0.5375', '0.029411764705882353', '0.05125']
+{'instances': Instances(num_instances=5, image_height=800, image_width=1360, fields=[pred_boxes: Boxes(tensor([[ 938.0901,  405.8800,  970.6832,  440.2366],
+        [ 317.1624,  415.1835,  350.3961,  450.0606],
+        [ 637.1136,  508.7223,  659.6623,  527.2383],
+        [1243.0126,  487.9718, 1257.9841,  506.3331],
+        [ 637.1136,  508.7223,  659.6623,  527.2383]])), scores: tensor([0.9872, 0.9824, 0.1683, 0.0588, 0.0509]), pred_classes: tensor([0, 0, 2, 3, 3])])}
+00872
+['0', '0.7014705882352941', '0.5275', '0.023529411764705882', '0.04375']
+['0', '0.24485294117647058', '0.54', '0.02426470588235294', '0.04375']
+{'instances': Instances(num_instances=26, image_height=800, image_width=1360, fields=[pred_boxes: Boxes(tensor([[592.1555, 481.0851, 623.2808, 512.3912],
+        [891.8417, 389.9934, 909.7153, 410.5100],
+        [632.6590, 484.7839, 658.8406, 510.4188],
+        [  0.0000, 248.2135, 415.3509, 791.8200],
+        [632.6590, 484.7839, 658.8406, 510.4188],
+        [618.7488, 472.8708, 641.6723, 492.7616],
+        [  0.0000, 252.0872, 411.4493, 793.3838],
+        [891.8417, 389.9934, 909.7153, 410.5100],
+        [618.7488, 472.8708, 641.6723, 492.7616],
+        [618.7488, 472.8708, 641.6723, 492.7616],
+        [891.8417, 389.9934, 909.7153, 410.5100],
+        [593.1650, 481.1249, 623.9218, 512.2242],
+        [  0.0000, 248.2135, 415.3509, 791.8200],
+        [617.5395, 484.0594, 641.5395, 508.2370],
+        [632.6590, 484.7839, 658.8406, 510.4188],
+        [594.7988, 495.2868, 625.4280, 529.2770],
+        [888.7292, 394.2685, 904.5912, 411.3240],
+        [625.1868, 477.6873, 645.5024, 500.1525],
+        [615.6373, 465.4306, 634.4563, 485.3979],
+        [611.7925, 471.6851, 635.6687, 495.7661],
+        [625.1868, 477.6873, 645.5024, 500.1525],
+        [601.3296, 478.0261, 630.0895, 506.1453],
+        [615.6373, 465.4306, 634.4563, 485.3979],
+        [618.7488, 472.8708, 641.6723, 492.7616],
+        [888.7292, 394.2685, 904.5912, 411.3240],
+        [891.8417, 389.9934, 909.7153, 410.5100]])), scores: tensor([0.9350, 0.4475, 0.2694, 0.2264, 0.2150, 0.1719, 0.1654, 0.1573, 0.1507,
+        0.1452, 0.1384, 0.1241, 0.1239, 0.1081, 0.0964, 0.0915, 0.0735, 0.0676,
+        0.0657, 0.0646, 0.0615, 0.0600, 0.0588, 0.0545, 0.0540, 0.0527]), pred_classes: tensor([2, 0, 3, 2, 2, 2, 3, 3, 3, 0, 2, 3, 7, 2, 1, 2, 0, 3, 2, 2, 2, 2, 3, 1,
+        3, 9])])}
+00841
+['2', '0.44632352941176473', '0.62', '0.022794117647058822', '0.03875']
+{'instances': Instances(num_instances=16, image_height=800, image_width=1360, fields=[pred_boxes: Boxes(tensor([[ 804.3439,  477.4847,  833.0598,  506.8174],
+        [1061.4645,  379.6187, 1093.5260,  410.1578],
+        [1069.6439,  407.7300, 1090.2839,  428.5971],
+        [1069.6439,  407.7300, 1090.2839,  428.5971],
+        [1069.6439,  407.7300, 1090.2839,  428.5971],
+        [1065.5698,  392.1289, 1091.3179,  418.8024],
+        [1061.0068,  379.7469, 1093.7111,  409.8436],
+        [1065.1139,  392.9230, 1091.9116,  418.0558],
+        [ 426.9280,  501.3094,  442.4149,  521.6599],
+        [ 587.6722,  479.1681,  603.4875,  495.8416],
+        [1059.4493,  379.1209, 1093.1265,  409.6964],
+        [1069.6439,  407.7300, 1090.2839,  428.5971],
+        [ 585.1047,  488.2124,  599.8127,  502.6362],
+        [1069.9080,  417.2337, 1087.6885,  433.6734],
+        [ 587.4423,  474.7417,  603.2498,  493.0365],
+        [ 426.9280,  501.3094,  442.4149,  521.6599]])), scores: tensor([0.9458, 0.8845, 0.6573, 0.5207, 0.3366, 0.2423, 0.1472, 0.1198, 0.0907,
+        0.0861, 0.0822, 0.0687, 0.0615, 0.0570, 0.0554, 0.0507]), pred_classes: tensor([2, 3, 0, 2, 3, 3, 0, 0, 3, 2, 1, 1, 2, 2, 1, 2])])}
+00823
+['2', '0.6014705882352941', '0.61375', '0.021323529411764706', '0.03625']
+['3', '0.7919117647058823', '0.4925', '0.023529411764705882', '0.03875']
+['0', '0.7933823529411764', '0.52125', '0.015441176470588236', '0.02625']
+['2', '0.7933823529411764', '0.52125', '0.015441176470588236', '0.02625']
+{'instances': Instances(num_instances=1, image_height=800, image_width=1360, fields=[pred_boxes: Boxes(tensor([[775.7803, 330.8263, 822.2288, 378.3488]])), scores: tensor([0.9984]), pred_classes: tensor([0])])}
+00833
+['0', '0.586764705882353', '0.4425', '0.03455882352941177', '0.06']
+{'instances': Instances(num_instances=5, image_height=800, image_width=1360, fields=[pred_boxes: Boxes(tensor([[465.4627, 468.0433, 491.0558, 494.3888],
+        [776.3859, 475.5424, 796.6220, 495.8575],
+        [783.2944, 466.7413, 795.9406, 478.3973],
+        [743.6169, 461.6258, 751.2068, 472.3046],
+        [783.1212, 472.7042, 797.9441, 489.2573]])), scores: tensor([0.9457, 0.7902, 0.0783, 0.0679, 0.0606]), pred_classes: tensor([0, 0, 0, 0, 0])])}
+00876
+['0', '0.3514705882352941', '0.60125', '0.01911764705882353', '0.0325']
+['0', '0.5779411764705882', '0.60625', '0.014705882352941176', '0.025']
+{'instances': Instances(num_instances=7, image_height=800, image_width=1360, fields=[pred_boxes: Boxes(tensor([[817.1778, 508.1967, 849.5877, 541.6093],
+        [322.4694, 502.5060, 356.0029, 536.9737],
+        [108.0991, 529.1536, 122.4679, 548.9136],
+        [584.8514, 501.5726, 611.2864, 517.6627],
+        [617.3618, 591.1326, 637.2274, 612.7250],
+        [108.0991, 529.1536, 122.4679, 548.9136],
+        [613.0251, 588.7513, 630.0292, 608.3594]])), scores: tensor([0.9637, 0.9273, 0.1291, 0.1074, 0.0839, 0.0575, 0.0563]), pred_classes: tensor([0, 0, 0, 1, 2, 3, 2])])}
+00898
+['0', '0.6125', '0.655', '0.023529411764705882', '0.04125']
+['0', '0.24926470588235294', '0.64875', '0.025', '0.0425']
+{'instances': Instances(num_instances=2, image_height=800, image_width=1360, fields=[pred_boxes: Boxes(tensor([[853.9559, 510.0690, 889.0434, 545.3925],
+        [855.0486, 475.7745, 890.5595, 511.4631]])), scores: tensor([0.9695, 0.9624]), pred_classes: tensor([0, 0])])}
+00884
+['0', '0.6404411764705882', '0.65875', '0.026470588235294117', '0.04375']
+['0', '0.6411764705882353', '0.61625', '0.025735294117647058', '0.045']
+{'instances': Instances(num_instances=45, image_height=800, image_width=1360, fields=[pred_boxes: Boxes(tensor([[ 852.2593,  522.7975,  879.6504,  550.6305],
+        [ 852.3404,  522.8182,  879.7947,  550.3781],
+        [ 891.4737,  584.7699,  906.8046,  599.7974],
+        [ 852.6202,  522.8701,  880.0740,  550.5505],
+        [ 829.0267,  586.6770,  842.3933,  600.5892],
+        [ 834.5775,  544.2280,  849.4456,  561.3335],
+        [1055.8237,  574.4546, 1083.8890,  597.9576],
+        [ 797.6044,  532.0200,  808.7178,  549.1437],
+        [ 824.8077,  540.3050,  844.0493,  559.5465],
+        [ 864.6111,  569.9866,  876.0035,  585.3788],
+        [1055.8237,  574.4546, 1083.8890,  597.9576],
+        [ 852.5378,  567.6058,  863.8660,  582.0914],
+        [ 874.6945,  572.3865,  887.1679,  587.4798],
+        [ 860.4446,  569.2679,  871.6795,  583.8104],
+        [ 840.3620,  545.6909,  854.7322,  562.6123],
+        [1055.8237,  574.4546, 1083.8890,  597.9576],
+        [ 843.6136,  560.7459,  855.3619,  576.2991],
+        [ 797.6044,  532.0200,  808.7178,  549.1437],
+        [ 842.0335,  556.7891,  854.5325,  572.3102],
+        [ 852.0051,  523.0087,  879.6880,  550.4993],
+        [ 840.3620,  545.6909,  854.7322,  562.6123],
+        [ 865.4187,  564.8746,  877.5163,  580.4838],
+        [ 843.6594,  566.8517,  855.1930,  580.9933],
+        [ 789.5150,  577.2748,  806.3353,  597.8593],
+        [ 845.8759,  562.2527,  857.6636,  578.2349],
+        [ 842.0335,  556.7891,  854.5325,  572.3102],
+        [ 873.1122,  564.8850,  885.5557,  580.1221],
+        [ 857.6835,  556.4692,  872.3670,  572.2708],
+        [ 857.6835,  556.4692,  872.3670,  572.2708],
+        [ 847.1144,  529.8343,  871.8589,  555.5146],
+        [ 816.4360,  541.1625,  836.1216,  560.2559],
+        [ 838.1799,  573.4346,  850.4500,  586.7893],
+        [ 840.5649,  537.1514,  857.8552,  557.3657],
+        [ 876.7541,  579.5590,  889.2237,  593.1487],
+        [ 839.3607,  581.5957,  851.4788,  594.7592],
+        [ 864.9520,  557.2728,  878.9478,  572.3585],
+        [ 880.7186,  576.6815,  894.1730,  591.4451],
+        [ 854.1647,  538.2053,  875.3167,  560.1334],
+        [ 854.5842,  578.3276,  866.4203,  591.4875],
+        [ 845.7154,  544.4831,  863.5052,  563.3033],
+        [ 840.3620,  545.6909,  854.7322,  562.6123],
+        [ 829.0267,  586.6770,  842.3933,  600.5892],
+        [ 843.9258,  555.7023,  857.2173,  571.6541],
+        [ 805.0193,  579.5163,  820.5140,  596.7019],
+        [ 852.5378,  567.6058,  863.8660,  582.0914]])), scores: tensor([0.7635, 0.2646, 0.1642, 0.1537, 0.1263, 0.1231, 0.1198, 0.1128, 0.1041,
+        0.0980, 0.0958, 0.0941, 0.0939, 0.0918, 0.0908, 0.0884, 0.0819, 0.0817,
+        0.0813, 0.0810, 0.0774, 0.0772, 0.0758, 0.0706, 0.0667, 0.0655, 0.0646,
+        0.0626, 0.0624, 0.0619, 0.0615, 0.0611, 0.0609, 0.0597, 0.0577, 0.0568,
+        0.0562, 0.0557, 0.0539, 0.0531, 0.0517, 0.0514, 0.0508, 0.0507, 0.0505]), pred_classes: tensor([3, 2, 2, 0, 2, 3, 1, 0, 3, 2, 3, 2, 2, 2, 3, 2, 2, 3, 0, 1, 0, 2, 2, 2,
+        0, 3, 2, 2, 0, 3, 3, 2, 3, 2, 2, 2, 2, 2, 2, 0, 2, 0, 2, 2, 0])])}
+00887
+['3', '0.6360294117647058', '0.67', '0.019852941176470587', '0.035']
+{'instances': Instances(num_instances=3, image_height=800, image_width=1360, fields=[pred_boxes: Boxes(tensor([[ 373.6798,  405.4332,  411.3395,  444.4917],
+        [1271.8564,  379.0809, 1312.4694,  420.6559],
+        [ 705.2329,  479.7751,  719.5645,  493.3762]])), scores: tensor([0.9942, 0.9921, 0.0704]), pred_classes: tensor([0, 0, 2])])}
+00871
+['0', '0.28823529411764703', '0.53', '0.027941176470588237', '0.04875']
+['0', '0.9492647058823529', '0.49875', '0.030147058823529412', '0.05125']
+{'instances': Instances(num_instances=14, image_height=800, image_width=1360, fields=[pred_boxes: Boxes(tensor([[1083.3097,  377.1477, 1108.1240,  402.5150],
+        [ 513.8651,  393.6196,  535.3065,  414.8227],
+        [ 558.6342,  469.7083,  577.6177,  484.6705],
+        [ 626.1181,  472.5641,  643.4857,  489.5146],
+        [ 600.9492,  467.1689,  622.0782,  484.0294],
+        [1083.3097,  377.1477, 1108.1240,  402.5150],
+        [ 726.1238,  475.0804,  744.3634,  492.0616],
+        [1082.5355,  377.1605, 1108.8340,  402.8929],
+        [ 639.8178,  379.8277,  663.2400,  404.0054],
+        [ 584.7632,  418.6015,  595.8398,  434.5248],
+        [1079.0448,  537.4588, 1102.8467,  559.1852],
+        [ 537.9604,  484.1426,  560.0441,  501.9539],
+        [ 742.8351,  466.4934,  779.5527,  498.6068],
+        [ 639.8178,  379.8277,  663.2400,  404.0054]])), scores: tensor([0.9070, 0.1006, 0.0754, 0.0691, 0.0671, 0.0627, 0.0611, 0.0587, 0.0582,
+        0.0543, 0.0543, 0.0520, 0.0518, 0.0501]), pred_classes: tensor([ 0,  3,  2,  2,  2, 39,  2,  1,  1,  0, 58,  2,  2,  3])])}
+00825
+['0', '0.8051470588235294', '0.48625', '0.01838235294117647', '0.03125']
+{'instances': Instances(num_instances=9, image_height=800, image_width=1360, fields=[pred_boxes: Boxes(tensor([[1090.7782,  277.1392, 1141.1351,  325.1297],
+        [1025.3798,  468.0674, 1043.2247,  487.3265],
+        [ 718.2136,  146.1216,  744.1539,  172.9587],
+        [1025.3798,  468.0674, 1043.2247,  487.3265],
+        [ 815.0139,  282.1812,  828.4978,  296.8180],
+        [1025.3798,  468.0674, 1043.2247,  487.3265],
+        [1025.3798,  468.0674, 1043.2247,  487.3265],
+        [1091.3038,  276.3889, 1140.6915,  323.3691],
+        [ 815.0139,  282.1812,  828.4978,  296.8180]])), scores: tensor([0.9948, 0.2339, 0.1168, 0.0907, 0.0771, 0.0767, 0.0639, 0.0598, 0.0558]), pred_classes: tensor([ 1,  0,  3,  1,  0,  3,  2, 23,  3])])}
+00852
+['1', '0.8198529411764706', '0.37625', '0.0375', '0.06']
+{'instances': Instances(num_instances=14, image_height=800, image_width=1360, fields=[pred_boxes: Boxes(tensor([[ 686.8141,  498.0499,  717.5142,  530.4567],
+        [ 691.3051,  529.9561,  713.2997,  551.8782],
+        [ 691.3051,  529.9561,  713.2997,  551.8782],
+        [ 831.6265,  598.5063,  854.3765,  626.5812],
+        [ 687.7798,  512.0609,  716.2914,  543.1097],
+        [ 691.3051,  529.9561,  713.2997,  551.8782],
+        [ 831.6265,  598.5063,  854.3765,  626.5812],
+        [1188.9624,    2.2160, 1269.1591,  134.7418],
+        [ 690.3593,  522.6003,  715.0999,  546.0386],
+        [ 383.0628,  600.6208,  411.8994,  625.2468],
+        [ 686.4698,  498.3134,  717.9126,  531.0436],
+        [1166.4207,    1.4413, 1270.0112,  135.9497],
+        [1166.4207,    1.4413, 1270.0112,  135.9497],
+        [ 687.3819,  499.5536,  717.1182,  531.8157]])), scores: tensor([0.9476, 0.9032, 0.1710, 0.1536, 0.1308, 0.1238, 0.0885, 0.0857, 0.0783,
+        0.0715, 0.0701, 0.0646, 0.0593, 0.0522]), pred_classes: tensor([3, 0, 3, 0, 3, 2, 1, 9, 0, 2, 0, 0, 3, 1])])}
+00889
+['3', '0.5154411764705882', '0.6425', '0.022794117647058822', '0.04']
+['0', '0.5161764705882353', '0.675', '0.016176470588235296', '0.0275']
+{'instances': Instances(num_instances=19, image_height=800, image_width=1360, fields=[pred_boxes: Boxes(tensor([[ 374.1483,  381.3420,  409.5974,  418.2533],
+        [1090.5310,  346.0385, 1129.1168,  384.8842],
+        [ 950.0158,  462.8995,  965.6440,  479.2215],
+        [ 950.0158,  462.8995,  965.6440,  479.2215],
+        [ 950.0158,  462.8995,  965.6440,  479.2215],
+        [ 951.2113,  468.9920,  965.7089,  483.0484],
+        [ 861.8693,  458.9008,  872.1859,  471.2513],
+        [ 951.2113,  468.9920,  965.7089,  483.0484],
+        [ 859.9601,  461.8939,  871.0898,  474.4789],
+        [ 951.2113,  468.9920,  965.7089,  483.0484],
+        [ 854.1031,  466.4541,  866.0956,  479.9112],
+        [ 861.5687,  459.1590,  872.2551,  471.4841],
+        [ 849.0084,  474.7554,  862.0293,  488.5500],
+        [ 951.1942,  456.9729,  965.2595,  471.4049],
+        [ 950.0158,  462.8995,  965.6440,  479.2215],
+        [ 862.0571,  457.8155,  871.8334,  469.9000],
+        [ 957.2032,  479.4877,  968.2264,  492.2693],
+        [ 844.1945,  473.8297,  859.8294,  491.3384],
+        [ 843.4335,  468.7814,  857.4915,  485.6408]])), scores: tensor([0.9922, 0.9921, 0.3116, 0.1412, 0.1409, 0.1158, 0.0784, 0.0761, 0.0725,
+        0.0717, 0.0687, 0.0618, 0.0590, 0.0564, 0.0558, 0.0554, 0.0550, 0.0526,
+        0.0510]), pred_classes: tensor([0, 0, 0, 2, 3, 0, 2, 2, 2, 3, 2, 0, 2, 0, 1, 3, 0, 2, 2])])}
+00846
+['0', '0.2875', '0.49875', '0.025735294117647058', '0.04625']
+['0', '0.8154411764705882', '0.45625', '0.028676470588235293', '0.0475']
+{'instances': Instances(num_instances=7, image_height=800, image_width=1360, fields=[pred_boxes: Boxes(tensor([[1083.4984,  476.9715, 1134.5802,  529.3630],
+        [1092.7933,  527.5634, 1131.5869,  567.3332],
+        [ 388.0155,  525.3919,  417.0215,  554.5819],
+        [1084.8475,  476.8865, 1135.7280,  529.4717],
+        [1086.1274,  479.2367, 1135.0770,  527.8953],
+        [ 397.5168,  571.7838,  533.6405,  677.0327],
+        [ 388.2507,  525.2166,  417.0994,  554.4700]])), scores: tensor([0.9982, 0.9896, 0.9570, 0.0922, 0.0824, 0.0778, 0.0523]), pred_classes: tensor([3, 0, 0, 1, 0, 2, 3])])}
+00894
+['3', '0.8147058823529412', '0.6275', '0.0375', '0.06625']
+['0', '0.8169117647058823', '0.68375', '0.028676470588235293', '0.05']
+['0', '0.29558823529411765', '0.67375', '0.021323529411764706', '0.03625']
+{'instances': Instances(num_instances=8, image_height=800, image_width=1360, fields=[pred_boxes: Boxes(tensor([[1025.5881,  227.0495, 1085.4053,  286.8658],
+        [ 731.1179,  457.4909,  744.2621,  472.9646],
+        [ 471.1360,  466.6804,  500.8742,  498.4709],
+        [1026.1110,  225.8214, 1086.0082,  287.8074],
+        [ 460.0066,  436.2044,  479.8404,  454.9618],
+        [ 471.0355,  466.4626,  501.0885,  498.2036],
+        [ 731.1179,  457.4909,  744.2621,  472.9646],
+        [1027.4214,  228.2394, 1086.5442,  287.7798]])), scores: tensor([0.9982, 0.1393, 0.1272, 0.0804, 0.0639, 0.0593, 0.0526, 0.0509]), pred_classes: tensor([3, 0, 2, 1, 3, 3, 3, 0])])}
+00842
+['3', '0.7757352941176471', '0.32', '0.04411764705882353', '0.07375']
+{'instances': Instances(num_instances=23, image_height=800, image_width=1360, fields=[pred_boxes: Boxes(tensor([[ 932.8138,  381.4679,  971.7345,  417.9777],
+        [ 943.2693,  415.2165,  971.0146,  443.7657],
+        [ 683.7255,  484.6694,  703.2824,  505.0424],
+        [ 938.8318,  399.3226,  970.7852,  430.2434],
+        [ 683.7255,  484.6694,  703.2824,  505.0424],
+        [ 683.7255,  484.6694,  703.2824,  505.0424],
+        [ 891.3789,  439.4374,  905.2298,  455.7787],
+        [ 697.7214,  487.9554,  712.8523,  504.5589],
+        [ 933.4086,  381.1830,  971.6647,  418.2036],
+        [ 659.9885,  480.9601,  674.0497,  495.3787],
+        [ 938.8318,  399.3226,  970.7852,  430.2434],
+        [ 943.1187,  415.1388,  971.0278,  443.7554],
+        [ 675.4964,  484.6946,  691.5031,  502.4171],
+        [ 688.6897,  480.9775,  706.4453,  498.7016],
+        [ 707.6719,  488.4105,  721.1237,  502.4875],
+        [ 389.5087,  520.0518,  405.8661,  538.4039],
+        [ 889.3489,  442.7146,  901.8832,  459.2803],
+        [ 869.5697,  448.7332,  882.0758,  466.0777],
+        [ 662.6175,  485.4211,  676.4734,  500.3820],
+        [ 683.7255,  484.6694,  703.2824,  505.0424],
+        [ 656.7852,  477.0331,  671.5196,  491.6929],
+        [1175.6082,  419.8242, 1191.6572,  435.9711],
+        [ 697.7758,  485.2538,  713.0703,  501.4944]])), scores: tensor([0.9754, 0.9345, 0.8066, 0.2152, 0.1735, 0.1679, 0.1539, 0.1439, 0.1333,
+        0.0985, 0.0879, 0.0866, 0.0847, 0.0811, 0.0806, 0.0771, 0.0661, 0.0633,
+        0.0604, 0.0588, 0.0564, 0.0528, 0.0507]), pred_classes: tensor([3, 2, 2, 3, 3, 0, 0, 2, 0, 2, 2, 3, 2, 2, 2, 2, 0, 0, 2, 1, 2, 0, 0])])}
+00853
+['3', '0.6992647058823529', '0.49875', '0.028676470588235293', '0.045']
+['2', '0.7036764705882353', '0.53625', '0.020588235294117647', '0.035']
+['2', '0.5095588235294117', '0.6175', '0.014705882352941176', '0.02625']
+{'instances': Instances(num_instances=19, image_height=800, image_width=1360, fields=[pred_boxes: Boxes(tensor([[1150.2421,  287.9449, 1256.5160,  383.6002],
+        [ 917.5139,  408.7143,  949.9675,  441.8253],
+        [ 831.2377,  447.6861,  846.4627,  464.0771],
+        [ 924.2908,  440.2932,  942.4709,  459.0675],
+        [1150.5282,  288.4099, 1254.3762,  385.2724],
+        [ 831.2377,  447.6861,  846.4627,  464.0771],
+        [ 924.2908,  440.2932,  942.4709,  459.0675],
+        [ 831.2377,  447.6861,  846.4627,  464.0771],
+        [ 924.2908,  440.2932,  942.4709,  459.0675],
+        [ 918.2360,  408.8581,  950.9240,  442.4330],
+        [ 919.9437,  420.4864,  944.8199,  448.3173],
+        [ 831.9943,  444.8697,  846.3817,  457.6989],
+        [1150.5282,  288.4099, 1254.3762,  385.2724],
+        [1150.5282,  288.4099, 1254.3762,  385.2724],
+        [1150.5282,  288.4099, 1254.3762,  385.2724],
+        [ 845.1024,  448.1218,  857.6154,  461.8014],
+        [ 849.1581,  444.9410,  860.8975,  458.0961],
+        [ 831.2377,  447.6861,  846.4627,  464.0771],
+        [ 831.2377,  447.6861,  846.4627,  464.0771]])), scores: tensor([0.9978, 0.9423, 0.5432, 0.2448, 0.1690, 0.1118, 0.1111, 0.0967, 0.0777,
+        0.0776, 0.0735, 0.0702, 0.0660, 0.0615, 0.0601, 0.0593, 0.0556, 0.0541,
+        0.0513]), pred_classes: tensor([ 1,  3,  0,  0,  3,  2,  2,  3,  3,  0,  3,  0, 56,  2,  0,  0,  0,  1,
+        32])])}
+00855
+['1', '0.8845588235294117', '0.41875', '0.07794117647058824', '0.12']
+['3', '0.6860294117647059', '0.53', '0.023529411764705882', '0.04125']
+['0', '0.6161764705882353', '0.56875', '0.011029411764705883', '0.02125']
+{'instances': Instances(num_instances=8, image_height=800, image_width=1360, fields=[pred_boxes: Boxes(tensor([[1231.4819,  386.7598, 1298.5609,  450.3371],
+        [ 555.0736,  500.4885,  570.2081,  516.0287],
+        [ 555.0736,  500.4885,  570.2081,  516.0287],
+        [ 587.7988,  452.8529,  641.5817,  479.4470],
+        [1231.6427,  386.9792, 1298.6113,  451.0357],
+        [ 582.2578,  453.0481,  645.6932,  500.6303],
+        [1231.6370,  385.9789, 1299.1140,  449.7821],
+        [ 526.0502,  508.5114,  548.4329,  526.6207]])), scores: tensor([0.9945, 0.1593, 0.1048, 0.0849, 0.0629, 0.0571, 0.0547, 0.0506]), pred_classes: tensor([ 1,  2,  3,  0, 23,  0, 76,  2])])}
+00874
+['1', '0.9294117647058824', '0.5225', '0.04926470588235294', '0.08']
+{'instances': Instances(num_instances=10, image_height=800, image_width=1360, fields=[pred_boxes: Boxes(tensor([[1131.4557,  559.6332, 1168.5092,  597.8135],
+        [ 477.9743,  544.4243,  513.0013,  581.5161],
+        [ 845.0550,  573.0620,  866.1652,  591.7728],
+        [ 931.6934,  569.3994,  947.0506,  582.4255],
+        [ 931.6934,  569.3994,  947.0506,  582.4255],
+        [ 914.3323,  574.1153,  927.0988,  587.7999],
+        [ 917.6683,  572.1428,  930.7358,  585.3327],
+        [ 930.0099,  573.1166,  943.3155,  585.9927],
+        [ 931.6934,  569.3994,  947.0506,  582.4255],
+        [ 910.4168,  575.6942,  921.4722,  588.5363]])), scores: tensor([0.9885, 0.9876, 0.2327, 0.1542, 0.0953, 0.0705, 0.0689, 0.0687, 0.0595,
+        0.0579]), pred_classes: tensor([0, 0, 2, 2, 0, 2, 2, 2, 3, 2])])}
+00881
+['0', '0.8448529411764706', '0.7225', '0.027205882352941177', '0.0475']
+['0', '0.3639705882352941', '0.7025', '0.026470588235294117', '0.04625']
+{'instances': Instances(num_instances=19, image_height=800, image_width=1360, fields=[pred_boxes: Boxes(tensor([[ 973.4205,  371.6049, 1006.0561,  405.4059],
+        [1210.4768,  396.7285, 1278.7344,  575.3164],
+        [ 789.8442,  466.6151,  806.0030,  482.0300],
+        [ 786.4509,  465.2011,  801.8547,  479.2960],
+        [ 841.4752,  453.3591,  854.0500,  466.8516],
+        [ 774.9883,  468.7287,  788.3160,  483.5143],
+        [ 838.8686,  456.4398,  852.1921,  469.1613],
+        [ 630.8889,  399.9701,  663.6691,  437.0599],
+        [ 777.3383,  466.5420,  791.5759,  480.3720],
+        [ 784.0847,  467.7847,  798.6401,  483.8469],
+        [ 796.1793,  467.0873,  811.1783,  481.8246],
+        [ 763.4656,  470.1991,  777.8569,  483.9913],
+        [ 751.3110,  471.6739,  764.6425,  484.9517],
+        [ 845.6078,  454.6538,  858.3779,  468.3347],
+        [ 841.4741,  448.8502,  854.7323,  461.2598],
+        [ 748.4838,  474.2778,  760.7542,  488.6384],
+        [ 771.3699,  469.5851,  785.9669,  484.1428],
+        [ 770.3546,  467.4785,  785.3730,  480.9436],
+        [ 808.8433,  468.5097,  820.3328,  481.0666]])), scores: tensor([0.9768, 0.1938, 0.1739, 0.1491, 0.1420, 0.1186, 0.1161, 0.1090, 0.0933,
+        0.0932, 0.0834, 0.0819, 0.0723, 0.0691, 0.0657, 0.0618, 0.0609, 0.0586,
+        0.0509]), pred_classes: tensor([0, 0, 2, 2, 2, 2, 2, 3, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2])])}
+00850
+['0', '0.7272058823529411', '0.485', '0.02426470588235294', '0.0425']
+{'instances': Instances(num_instances=31, image_height=800, image_width=1360, fields=[pred_boxes: Boxes(tensor([[1181.4414,  253.0721, 1254.3466,  326.1014],
+        [  83.8733,  354.0678,  145.0446,  430.3232],
+        [ 824.2880,  446.0092,  843.5745,  464.5008],
+        [ 532.0135,  467.6280,  548.4149,  484.2917],
+        [ 824.2880,  446.0092,  843.5745,  464.5008],
+        [ 817.9897,  445.9235,  835.9223,  461.9963],
+        [ 824.6305,  445.8491,  842.2309,  461.1548],
+        [  84.6816,  363.5228,  143.3488,  505.1046],
+        [ 824.2880,  446.0092,  843.5745,  464.5008],
+        [ 532.0135,  467.6280,  548.4149,  484.2917],
+        [ 810.2775,  444.7362,  824.3247,  456.7388],
+        [ 558.1022,  508.2924,  576.8281,  523.4976],
+        [ 526.9869,  481.0669,  560.7914,  512.2473],
+        [ 522.3129,  470.1133,  566.4141,  568.7967],
+        [ 532.0135,  467.6280,  548.4149,  484.2917],
+        [1030.0778,  491.1119, 1045.6648,  511.4436],
+        [ 817.9897,  445.9235,  835.9223,  461.9963],
+        [ 809.4178,  446.3149,  823.3914,  459.7305],
+        [ 806.3992,  456.3231,  819.9628,  472.3597],
+        [ 526.8720,  468.8861,  554.6465,  491.1765],
+        [ 829.8082,  447.4156,  846.1866,  465.3101],
+        [ 810.6851,  441.9188,  825.9814,  453.9221],
+        [ 814.7831,  442.5716,  831.9871,  455.3471],
+        [ 816.5953,  445.0659,  833.2153,  458.7905],
+        [ 528.8998,  479.4763,  561.0001,  508.9771],
+        [1030.0778,  491.1119, 1045.6648,  511.4436],
+        [ 814.7831,  442.5716,  831.9871,  455.3471],
+        [ 810.2775,  444.7362,  824.3247,  456.7388],
+        [ 806.5289,  448.7443,  819.3281,  461.4452],
+        [ 806.5289,  448.7443,  819.3281,  461.4452],
+        [ 806.3992,  456.3231,  819.9628,  472.3597]])), scores: tensor([0.9962, 0.6645, 0.1403, 0.1278, 0.1063, 0.0955, 0.0905, 0.0899, 0.0887,
+        0.0837, 0.0822, 0.0796, 0.0792, 0.0777, 0.0745, 0.0726, 0.0720, 0.0719,
+        0.0701, 0.0696, 0.0656, 0.0640, 0.0631, 0.0622, 0.0616, 0.0578, 0.0568,
+        0.0554, 0.0528, 0.0516, 0.0505]), pred_classes: tensor([0, 1, 2, 1, 0, 2, 1, 1, 3, 2, 2, 2, 2, 0, 0, 3, 0, 0, 0, 1, 1, 1, 1, 3,
+        1, 0, 2, 3, 2, 0, 2])])}
+00854
+['0', '0.8948529411764706', '0.36125', '0.05367647058823529', '0.09125']
+['1', '0.0838235294117647', '0.49', '0.045588235294117645', '0.095']
+{'instances': Instances(num_instances=18, image_height=800, image_width=1360, fields=[pred_boxes: Boxes(tensor([[803.4105, 524.3198, 828.5916, 549.7120],
+        [803.4105, 524.3198, 828.5916, 549.7120],
+        [729.4744, 578.5065, 744.4831, 593.3546],
+        [716.0020, 579.5311, 731.6814, 594.1912],
+        [803.4105, 524.3198, 828.5916, 549.7120],
+        [739.6373, 577.3105, 754.4329, 592.6769],
+        [ 98.8355, 568.8333, 114.5832, 584.8370],
+        [802.1065, 524.1885, 827.7476, 550.3049],
+        [103.3313, 568.1093, 118.6345, 582.5137],
+        [107.1415, 564.7034, 121.2605, 577.6586],
+        [103.5348, 545.2693, 117.5427, 561.1891],
+        [752.1746, 542.6138, 763.3811, 554.5471],
+        [108.0576, 559.9799, 122.7399, 572.9945],
+        [711.7024, 582.8766, 726.2404, 598.7168],
+        [749.1583, 576.0087, 763.4532, 591.0599],
+        [108.0576, 559.9799, 122.7399, 572.9945],
+        [396.0888, 557.7745, 407.9708, 571.2252],
+        [630.8682, 583.6010, 646.9526, 599.6660]])), scores: tensor([0.4032, 0.2632, 0.1095, 0.1028, 0.0968, 0.0885, 0.0799, 0.0709, 0.0644,
+        0.0568, 0.0565, 0.0565, 0.0556, 0.0554, 0.0541, 0.0519, 0.0519, 0.0516]), pred_classes: tensor([3, 2, 2, 2, 1, 2, 0, 0, 0, 0, 1, 0, 0, 2, 2, 1, 3, 2])])}
+00897
+{'instances': Instances(num_instances=14, image_height=800, image_width=1360, fields=[pred_boxes: Boxes(tensor([[ 571.1139,  456.0046,  590.2009,  476.4911],
+        [1031.1595,  439.7193, 1049.7977,  459.2057],
+        [ 571.1139,  456.0046,  590.2009,  476.4911],
+        [ 580.2280,  458.7015,  594.1536,  476.4097],
+        [ 715.0861,  485.4736,  730.2194,  499.7480],
+        [ 571.1139,  456.0046,  590.2009,  476.4911],
+        [ 573.3060,  469.1987,  589.8351,  483.6764],
+        [ 744.2554,  483.0313,  758.1067,  496.0772],
+        [ 449.0796,  493.8230,  464.7461,  511.0948],
+        [1112.5072,  468.8890, 1124.2018,  489.0653],
+        [ 738.2687,  483.4434,  751.5706,  496.5891],
+        [ 695.2628,  490.0380,  712.0181,  503.4718],
+        [ 792.0309,  483.7581,  805.5635,  499.4488],
+        [1032.0156,  450.5437, 1048.8723,  465.9417]])), scores: tensor([0.8270, 0.7090, 0.0911, 0.0824, 0.0822, 0.0787, 0.0773, 0.0772, 0.0645,
+        0.0567, 0.0550, 0.0540, 0.0538, 0.0535]), pred_classes: tensor([0, 0, 1, 0, 2, 3, 0, 2, 0, 0, 2, 2, 2, 0])])}
+00870
+['0', '0.4264705882352941', '0.5825', '0.013970588235294118', '0.025']
+['0', '0.7647058823529411', '0.56125', '0.013235294117647059', '0.025']
+{'instances': Instances(num_instances=3, image_height=800, image_width=1360, fields=[pred_boxes: Boxes(tensor([[241.8602, 544.4756, 316.4201, 616.5444],
+        [535.7823, 604.6133, 557.7438, 624.0906],
+        [535.7823, 604.6133, 557.7438, 624.0906]])), scores: tensor([0.9969, 0.1634, 0.0547]), pred_classes: tensor([0, 2, 3])])}
+00882
+['0', '0.20441176470588235', '0.725', '0.05514705882352941', '0.09']
+{'instances': Instances(num_instances=21, image_height=800, image_width=1360, fields=[pred_boxes: Boxes(tensor([[1126.7150,  259.6108, 1221.8854,  348.5477],
+        [ 853.1049,  431.8446,  875.8226,  455.1946],
+        [ 853.3941,  432.0837,  875.9916,  455.7369],
+        [ 853.1049,  431.8446,  875.8226,  455.1946],
+        [1126.4010,  260.2371, 1224.7866,  347.7250],
+        [1126.4010,  260.2371, 1224.7866,  347.7250],
+        [ 807.7067,  482.4389,  821.3745,  496.8534],
+        [ 751.1349,  485.6740,  768.0822,  499.8551],
+        [ 803.3478,  482.0330,  818.2779,  497.0495],
+        [ 853.3941,  432.0837,  875.9916,  455.7369],
+        [ 803.3323,  482.1082,  818.9019,  496.4865],
+        [1126.4010,  260.2371, 1224.7866,  347.7250],
+        [ 751.1349,  485.6740,  768.0822,  499.8551],
+        [ 794.3760,  483.3831,  808.9263,  497.2215],
+        [ 751.1349,  485.6740,  768.0822,  499.8551],
+        [ 794.3760,  483.3831,  808.9263,  497.2215],
+        [ 744.9199,  486.0281,  759.3099,  499.6922],
+        [ 794.3760,  483.3831,  808.9263,  497.2215],
+        [1159.7006,  437.6241, 1192.0830,  462.2006],
+        [ 751.1349,  485.6740,  768.0822,  499.8551],
+        [ 744.9199,  486.0281,  759.3099,  499.6922]])), scores: tensor([0.9975, 0.6408, 0.3996, 0.1497, 0.1052, 0.1022, 0.0934, 0.0924, 0.0913,
+        0.0840, 0.0766, 0.0732, 0.0716, 0.0619, 0.0604, 0.0593, 0.0592, 0.0567,
+        0.0536, 0.0532, 0.0530]), pred_classes: tensor([3, 3, 0, 1, 1, 0, 0, 2, 3, 2, 2, 2, 0, 3, 3, 2, 2, 0, 1, 1, 0])])}
+00857
+['3', '0.8625', '0.37875', '0.06985294117647059', '0.11125']
+['3', '0.6352941176470588', '0.55375', '0.016176470588235296', '0.03']
+{'instances': Instances(num_instances=8, image_height=800, image_width=1360, fields=[pred_boxes: Boxes(tensor([[ 982.2993,  240.6277, 1053.3914,  312.2032],
+        [ 902.4033,  409.2035,  915.7900,  427.0442],
+        [ 809.9069,  455.9067,  828.0535,  474.7192],
+        [ 806.4869,  456.7849,  820.3399,  474.7668],
+        [ 982.2196,  240.6431, 1052.9950,  309.8274],
+        [ 806.5513,  451.8394,  819.7593,  467.3777],
+        [ 810.8801,  453.3998,  827.1764,  469.3573],
+        [ 738.2111,  453.1966,  756.9340,  468.3434]])), scores: tensor([0.9609, 0.3460, 0.2805, 0.1271, 0.1099, 0.0644, 0.0629, 0.0531]), pred_classes: tensor([0, 0, 0, 0, 3, 0, 2, 2])])}
+00848
+['0', '0.7477941176470588', '0.345', '0.05220588235294118', '0.09']
+{'instances': Instances(num_instances=3, image_height=800, image_width=1360, fields=[pred_boxes: Boxes(tensor([[ 56.3080, 362.6173,  91.9323, 393.6581],
+        [126.9214, 465.6124, 140.0627, 486.7143],
+        [ 61.4346, 408.0791,  84.6215, 445.2536]])), scores: tensor([0.9260, 0.1009, 0.0613]), pred_classes: tensor([3, 0, 9])])}
+00836
+['3', '0.05367647058823529', '0.47125', '0.025735294117647058', '0.03875']
+{'instances': Instances(num_instances=27, image_height=800, image_width=1360, fields=[pred_boxes: Boxes(tensor([[ 764.0299,  412.9270,  793.5721,  439.4456],
+        [ 735.8788,  416.1574,  759.1780,  439.5405],
+        [ 493.5228,  368.7838,  522.0001,  397.1192],
+        [ 483.1854,  464.6427,  500.2628,  480.4052],
+        [ 472.9411,  468.1765,  491.6982,  483.5467],
+        [ 636.1187,  345.8742,  663.5000,  372.4486],
+        [ 574.6770,  403.5466,  592.0172,  427.8615],
+        [ 476.7874,  465.5449,  494.8211,  480.3448],
+        [ 736.4521,  437.9895,  754.0521,  457.7890],
+        [ 467.7274,  472.1212,  488.5250,  487.2912],
+        [ 764.1362,  413.2555,  793.5042,  439.6444],
+        [ 735.5184,  431.5191,  755.6779,  448.7347],
+        [ 764.6252,  413.6679,  794.0809,  440.6273],
+        [1226.8029,  364.4259, 1247.6936,  386.9115],
+        [ 735.8788,  416.1574,  759.1780,  439.5405],
+        [ 434.7026,  411.4390,  454.9082,  430.8321],
+        [ 764.1362,  413.2555,  793.5042,  439.6444],
+        [ 885.1765,  436.0352, 1159.3414,  657.4745],
+        [ 738.7809,  455.3682,  753.2103,  473.4341],
+        [ 493.0883,  367.8543,  522.1414,  397.2315],
+        [ 767.1606,  421.5057,  793.4396,  445.8918],
+        [ 542.7912,  472.1527,  565.3774,  494.5978],
+        [ 482.6432,  464.4910,  500.1970,  479.9431],
+        [ 735.8788,  416.1574,  759.1780,  439.5405],
+        [ 730.3975,  438.5038,  745.8198,  457.5463],
+        [ 434.7729,  470.5530,  451.5559,  483.9775],
+        [ 543.6792,  388.0858,  557.0497,  402.8163]])), scores: tensor([0.8182, 0.2994, 0.2881, 0.2215, 0.1811, 0.1793, 0.1333, 0.1235, 0.1166,
+        0.1147, 0.1125, 0.0883, 0.0772, 0.0738, 0.0733, 0.0676, 0.0657, 0.0647,
+        0.0587, 0.0578, 0.0576, 0.0560, 0.0541, 0.0510, 0.0509, 0.0504, 0.0500]), pred_classes: tensor([ 1,  2,  2,  2,  2,  2,  0,  2,  2,  2,  3,  2,  0,  0, 56,  1, 24,  2,
+         2, 56,  1,  2,  3,  0,  2,  2,  3])])}
+00835
+['1', '0.5720588235294117', '0.53125', '0.021323529411764706', '0.03375']
+{'instances': Instances(num_instances=27, image_height=800, image_width=1360, fields=[pred_boxes: Boxes(tensor([[812.1977, 433.2386, 839.9649, 458.0741],
+        [615.9264, 443.7093, 648.8874, 474.4140],
+        [762.0931, 467.6410, 775.2765, 483.6093],
+        [722.1766, 470.8383, 735.6475, 486.6652],
+        [615.8895, 443.9096, 648.4534, 474.2760],
+        [682.7856, 469.0001, 694.7971, 483.1184],
+        [682.8639, 475.6210, 695.7759, 491.6002],
+        [684.0490, 475.6955, 696.5106, 491.1956],
+        [728.3149, 470.5888, 738.1841, 484.9406],
+        [683.7343, 469.7101, 695.5961, 483.6093],
+        [755.8922, 468.5475, 765.2750, 482.5646],
+        [683.2443, 464.4039, 694.8184, 476.7264],
+        [769.0887, 469.4950, 779.7477, 483.9841],
+        [721.9440, 470.4944, 735.6470, 486.6832],
+        [627.3245, 471.2375, 644.2866, 488.5817],
+        [762.0931, 467.6410, 775.2765, 483.6093],
+        [686.4774, 471.1349, 696.7039, 485.5682],
+        [722.3525, 470.4008, 736.0563, 486.3397],
+        [762.4003, 467.8326, 775.5550, 483.6667],
+        [721.9440, 470.4944, 735.6470, 486.6832],
+        [765.0984, 473.1386, 776.4447, 486.5267],
+        [762.0931, 467.6410, 775.2765, 483.6093],
+        [623.9553, 459.8196, 648.1883, 481.1210],
+        [683.7343, 469.7101, 695.5961, 483.6093],
+        [684.0490, 475.6955, 696.5106, 491.1956],
+        [682.8639, 475.6210, 695.7759, 491.6002],
+        [602.6459, 444.8182, 634.6406, 469.1000]])), scores: tensor([0.9647, 0.8331, 0.4693, 0.4356, 0.3139, 0.2481, 0.2243, 0.1926, 0.1409,
+        0.1379, 0.1261, 0.0959, 0.0917, 0.0848, 0.0824, 0.0816, 0.0755, 0.0729,
+        0.0698, 0.0625, 0.0619, 0.0615, 0.0603, 0.0549, 0.0536, 0.0530, 0.0525]), pred_classes: tensor([1, 1, 0, 0, 3, 2, 2, 0, 0, 0, 0, 2, 0, 2, 0, 2, 2, 1, 1, 3, 0, 3, 1, 1,
+        1, 3, 1])])}
+00858
+['1', '0.6066176470588235', '0.55625', '0.019852941176470587', '0.03125']
+['1', '0.46397058823529413', '0.5725', '0.02426470588235294', '0.03875']
+{'instances': Instances(num_instances=5, image_height=800, image_width=1360, fields=[pred_boxes: Boxes(tensor([[ 419.9359,  409.8822,  455.9641,  448.6729],
+        [ 420.5226,  409.3493,  456.5580,  448.1697],
+        [ 420.1255,  409.9321,  456.5076,  448.6486],
+        [ 716.9952,  497.8300,  735.3402,  514.5901],
+        [1220.9016,  375.0698, 1259.0830,  413.5935]])), scores: tensor([0.3192, 0.2424, 0.0880, 0.0715, 0.0655]), pred_classes: tensor([0, 3, 2, 2, 3])])}
+00863
+{'instances': Instances(num_instances=24, image_height=800, image_width=1360, fields=[pred_boxes: Boxes(tensor([[ 342.8768,  185.6398,  429.9171,  272.1742],
+        [ 572.9222,  489.4771,  597.5195,  514.3546],
+        [ 868.8493,  467.7348,  883.0148,  481.8058],
+        [ 580.9937,  487.9328,  601.4052,  510.5226],
+        [ 224.6659,  393.2116,  256.7592,  430.7810],
+        [ 341.0176,  182.1693,  432.1241,  274.8459],
+        [ 933.8790,  486.5411,  950.4429,  503.4558],
+        [ 869.5237,  469.2415,  885.3104,  485.3506],
+        [ 849.9129,  486.3100,  880.1852,  510.4369],
+        [ 341.0176,  182.1693,  432.1241,  274.8459],
+        [1147.1912,  434.7896, 1160.6453,  450.5589],
+        [ 587.5208,  480.3228,  608.7910,  501.8075],
+        [ 933.8790,  486.5411,  950.4429,  503.4558],
+        [ 977.4903,  477.1130,  993.3492,  493.6447],
+        [ 869.8234,  476.2371,  885.5395,  492.9934],
+        [1283.4701,  444.9591, 1300.8755,  468.6036],
+        [ 869.9685,  469.1742,  886.3065,  487.7242],
+        [ 865.4088,  479.4873,  884.1231,  496.9806],
+        [ 569.5942,  497.1810,  593.1183,  520.0006],
+        [ 869.8234,  476.2371,  885.5395,  492.9934],
+        [ 870.0771,  465.4380,  883.6671,  479.0543],
+        [ 863.6944,  474.0944,  880.8449,  488.9034],
+        [ 863.6944,  474.0944,  880.8449,  488.9034],
+        [ 994.9026,  476.9395, 1014.4155,  497.2705]])), scores: tensor([0.9940, 0.7370, 0.3715, 0.2204, 0.1752, 0.1616, 0.1240, 0.1073, 0.1010,
+        0.0987, 0.0926, 0.0921, 0.0856, 0.0740, 0.0679, 0.0644, 0.0616, 0.0611,
+        0.0603, 0.0593, 0.0551, 0.0543, 0.0509, 0.0501]), pred_classes: tensor([3, 2, 0, 2, 3, 0, 2, 2, 2, 2, 0, 2, 0, 2, 0, 2, 0, 2, 2, 2, 2, 0, 2, 2])])}
+00865
+['3', '0.28308823529411764', '0.285', '0.06397058823529411', '0.10875']
+['2', '0.4294117647058823', '0.62625', '0.01838235294117647', '0.03125']
+{'instances': Instances(num_instances=9, image_height=800, image_width=1360, fields=[pred_boxes: Boxes(tensor([[ 229.1834,  402.9423,  296.1708,  470.6533],
+        [ 202.3896,  530.5282,  281.2206,  611.5565],
+        [ 231.4103,  469.2344,  302.3069,  541.3017],
+        [ 215.6376,  491.8451,  294.8889,  582.6607],
+        [ 230.3411,  402.7385,  295.3195,  470.1491],
+        [ 231.3786,  469.5045,  302.8053,  542.7952],
+        [1049.7095,  574.3254, 1082.2485,  600.0988],
+        [ 206.7835,  563.0170,  276.5972,  657.2036],
+        [ 230.6626,  402.9165,  296.7435,  470.8415]])), scores: tensor([0.9921, 0.9816, 0.1456, 0.1030, 0.0609, 0.0536, 0.0529, 0.0516, 0.0508]), pred_classes: tensor([3, 2, 3, 2, 2, 2, 3, 2, 1])])}
+00885
+['3', '0.19264705882352942', '0.545', '0.04926470588235294', '0.085']
+['2', '0.17720588235294119', '0.7125', '0.05808823529411765', '0.10125']
+{'instances': Instances(num_instances=40, image_height=800, image_width=1360, fields=[pred_boxes: Boxes(tensor([[ 913.3334,  444.9983,  931.2625,  461.3803],
+        [ 913.3049,  444.6862,  931.6198,  461.7157],
+        [ 913.3334,  444.9983,  931.2625,  461.3803],
+        [1109.4749,  473.5583, 1130.1323,  489.9251],
+        [1132.3831,  472.6464, 1149.0326,  486.9258],
+        [ 913.3334,  444.9983,  931.2625,  461.3803],
+        [ 886.4103,  469.2289,  897.8604,  482.1965],
+        [ 925.0711,  477.6367,  938.4363,  493.0403],
+        [1060.5210,  476.0702, 1082.7419,  492.5683],
+        [1151.7390,  473.4890, 1170.6321,  487.7531],
+        [ 913.0611,  450.9560,  927.8542,  464.4637],
+        [1141.5199,  472.5411, 1158.0883,  487.4211],
+        [ 883.5114,  474.3362,  895.8155,  486.1458],
+        [ 886.3062,  467.2677,  898.0634,  479.1606],
+        [ 882.5135,  485.1537,  895.1360,  496.9603],
+        [ 922.6736,  478.2901,  934.4629,  491.8011],
+        [ 921.5395,  481.2101,  933.5489,  494.7634],
+        [ 918.2409,  463.2691,  931.3058,  475.4941],
+        [ 840.5588,  491.8601,  854.7319,  505.2185],
+        [ 876.2206,  488.0077,  891.2775,  500.2355],
+        [ 885.9835,  481.5350,  897.1771,  493.3357],
+        [ 922.1967,  467.9319,  935.7880,  480.2391],
+        [ 913.0611,  450.9560,  927.8542,  464.4637],
+        [ 915.0656,  476.4564,  925.3861,  488.0345],
+        [ 894.9605,  471.0608,  904.2788,  483.9082],
+        [ 897.3235,  465.2250,  907.1674,  477.0623],
+        [ 914.0574,  462.3948,  924.8823,  473.7414],
+        [ 915.0656,  476.4564,  925.3861,  488.0345],
+        [ 914.0574,  462.3948,  924.8823,  473.7414],
+        [ 918.2409,  463.2691,  931.3058,  475.4941],
+        [ 817.0143,  490.7898,  839.8124,  510.0605],
+        [ 601.4229,  465.1397,  619.2453,  483.8099],
+        [ 903.7580,  457.9981,  914.9434,  470.6456],
+        [1030.1296,  480.9897, 1043.8950,  494.5591],
+        [ 583.7183,  435.8127,  618.2123,  465.7030],
+        [1109.4749,  473.5583, 1130.1323,  489.9251],
+        [ 915.7289,  483.7834,  926.8353,  495.5643],
+        [ 601.4592,  470.4633,  616.8196,  488.9113],
+        [ 897.3235,  465.2250,  907.1674,  477.0623],
+        [ 903.7580,  457.9981,  914.9434,  470.6456]])), scores: tensor([0.3691, 0.3341, 0.2310, 0.2204, 0.1836, 0.1557, 0.1535, 0.1338, 0.1245,
+        0.1111, 0.1097, 0.1007, 0.0940, 0.0890, 0.0878, 0.0865, 0.0862, 0.0857,
+        0.0835, 0.0827, 0.0816, 0.0809, 0.0792, 0.0780, 0.0753, 0.0708, 0.0704,
+        0.0703, 0.0698, 0.0648, 0.0646, 0.0645, 0.0615, 0.0609, 0.0607, 0.0560,
+        0.0557, 0.0541, 0.0537, 0.0508]), pred_classes: tensor([ 1,  0,  3,  2,  2,  2,  2,  0,  2,  2,  0,  2,  2,  0,  2,  2,  0,  0,
+         2,  2,  2,  0,  2,  2,  2,  2,  0,  0,  2,  2,  2,  0,  0,  2, 58,  0,
+         2,  0,  0,  2])])}
+00864
+{'instances': Instances(num_instances=4, image_height=800, image_width=1360, fields=[pred_boxes: Boxes(tensor([[1231.0001,  315.5436, 1308.6442,  389.3148],
+        [  57.1981,  403.1621,  128.4595,  474.1191],
+        [ 242.4671,  408.1961,  279.7138,  447.7161],
+        [  57.5410,  402.1725,  129.8538,  473.3821]])), scores: tensor([0.9945, 0.9851, 0.0813, 0.0561]), pred_classes: tensor([ 1,  1,  2, 23])])}
+00869
+['1', '0.9330882352941177', '0.44', '0.05661764705882353', '0.0925']
+['1', '0.06764705882352941', '0.5475', '0.05220588235294118', '0.08875']
+{'instances': Instances(num_instances=15, image_height=800, image_width=1360, fields=[pred_boxes: Boxes(tensor([[894.0997, 386.1539, 931.0363, 421.0690],
+        [609.0579, 435.2455, 629.7439, 457.1040],
+        [604.0878, 448.6024, 619.7433, 466.8430],
+        [609.5837, 444.9407, 626.8162, 464.9202],
+        [603.7651, 436.9426, 624.3466, 463.1461],
+        [745.8685, 471.6139, 761.6197, 485.2617],
+        [598.7537, 443.1190, 615.4745, 460.3843],
+        [887.5101, 382.2137, 915.6683, 417.8989],
+        [894.0997, 386.1539, 931.0363, 421.0690],
+        [589.7263, 444.7994, 609.8237, 461.4759],
+        [536.3821, 498.4557, 548.6384, 518.5303],
+        [592.9627, 450.8243, 609.5543, 465.9740],
+        [599.7770, 452.1438, 613.4500, 467.6956],
+        [600.4819, 423.5541, 619.0316, 447.3784],
+        [438.1103, 488.9433, 452.6454, 507.9165]])), scores: tensor([0.9752, 0.3228, 0.1424, 0.1412, 0.0833, 0.0733, 0.0701, 0.0658, 0.0609,
+        0.0602, 0.0576, 0.0576, 0.0565, 0.0515, 0.0508]), pred_classes: tensor([ 1,  1,  1,  1,  1,  2,  1,  1, 30,  1,  2,  1,  1,  1,  2])])}
+00859
+['1', '0.6705882352941176', '0.50375', '0.027205882352941177', '0.04375']
+{'instances': Instances(num_instances=15, image_height=800, image_width=1360, fields=[pred_boxes: Boxes(tensor([[ 878.1566,  444.0353,  896.4589,  465.9071],
+        [ 591.6877,  467.8041,  610.0156,  487.1434],
+        [ 878.9659,  453.1444,  894.8890,  469.7399],
+        [ 874.6990,  457.3622,  891.4634,  474.1620],
+        [ 870.8733,  463.6857,  887.3145,  481.0724],
+        [ 592.3214,  468.3720,  610.6512,  487.8785],
+        [ 586.4974,  467.9380,  603.8675,  484.6633],
+        [ 869.3198,  462.9582,  886.2023,  482.0116],
+        [ 873.4192,  449.3452,  888.4401,  467.2602],
+        [ 878.1566,  444.0353,  896.4589,  465.9071],
+        [ 587.6892,  464.4747,  602.4884,  478.6118],
+        [ 874.8244,  442.5148,  889.0739,  462.6570],
+        [1239.6653,  447.2966, 1256.6564,  466.4777],
+        [ 591.6877,  467.8041,  610.0156,  487.1434],
+        [ 874.6990,  457.3622,  891.4634,  474.1620]])), scores: tensor([0.4626, 0.4267, 0.2267, 0.1960, 0.1835, 0.1498, 0.1310, 0.0921, 0.0828,
+        0.0643, 0.0613, 0.0587, 0.0572, 0.0528, 0.0510]), pred_classes: tensor([0, 1, 0, 0, 0, 0, 1, 2, 0, 1, 1, 0, 3, 3, 2])])}
+00868
+{'instances': Instances(num_instances=8, image_height=800, image_width=1360, fields=[pred_boxes: Boxes(tensor([[749.6124, 550.6331, 766.6205, 569.5225],
+        [474.2955, 555.2103, 493.3171, 574.1315],
+        [749.6124, 550.6331, 766.6205, 569.5225],
+        [474.2955, 555.2103, 493.3171, 574.1315],
+        [749.6124, 550.6331, 766.6205, 569.5225],
+        [474.2955, 555.2103, 493.3171, 574.1315],
+        [474.2955, 555.2103, 493.3171, 574.1315],
+        [749.5459, 551.0215, 766.9056, 569.4119]])), scores: tensor([0.6916, 0.6384, 0.2407, 0.1130, 0.1076, 0.0647, 0.0546, 0.0507]), pred_classes: tensor([0, 0, 3, 3, 2, 2, 1, 1])])}
+00891
+['0', '0.5566176470588236', '0.69875', '0.0125', '0.02375']
+['0', '0.3551470588235294', '0.705', '0.013970588235294118', '0.02375']
+{'instances': Instances(num_instances=13, image_height=800, image_width=1360, fields=[pred_boxes: Boxes(tensor([[ 974.4800,  369.3292, 1012.9865,  409.6059],
+        [ 625.2078,  444.1634,  640.0213,  461.1906],
+        [ 341.2914,  480.4795,  362.1332,  499.1085],
+        [ 341.2914,  480.4795,  362.1332,  499.1085],
+        [ 375.3855,  487.7919,  392.2575,  504.9329],
+        [ 625.2323,  444.1305,  640.1280,  461.0461],
+        [ 365.0229,  488.8339,  381.4732,  505.0345],
+        [ 749.5674,  442.7133,  767.1264,  460.1285],
+        [ 374.9212,  483.3226,  391.7271,  500.6656],
+        [ 625.2078,  444.1634,  640.0213,  461.1906],
+        [ 376.1826,  498.6497,  392.8156,  513.2694],
+        [ 345.8748,  485.3321,  364.2170,  503.4603],
+        [ 366.2825,  484.8752,  383.2113,  501.7156]])), scores: tensor([0.9847, 0.1722, 0.1007, 0.0979, 0.0921, 0.0913, 0.0869, 0.0849, 0.0712,
+        0.0699, 0.0659, 0.0635, 0.0591]), pred_classes: tensor([0, 2, 1, 0, 0, 0, 0, 2, 1, 3, 0, 0, 1])])}
+00831
+['0', '0.7301470588235294', '0.48625', '0.027941176470588237', '0.05']
+{'instances': Instances(num_instances=10, image_height=800, image_width=1360, fields=[pred_boxes: Boxes(tensor([[397.1810, 357.8419, 442.3929, 411.4756],
+        [400.5256, 411.3292, 435.0123, 447.0373],
+        [939.7545, 396.9886, 961.1079, 418.5531],
+        [498.8098, 495.0450, 583.3142, 561.3921],
+        [377.1297, 516.5941, 394.8724, 541.6337],
+        [379.3527, 517.4923, 395.4679, 541.5533],
+        [397.9837, 359.0808, 443.1725, 410.6732],
+        [667.6838, 354.1560, 749.5351, 437.6126],
+        [939.7545, 396.9886, 961.1079, 418.5531],
+        [397.0034, 358.2070, 442.9656, 411.6215]])), scores: tensor([0.9955, 0.9069, 0.5189, 0.4160, 0.1461, 0.0857, 0.0825, 0.0698, 0.0612,
+        0.0586]), pred_classes: tensor([3, 2, 0, 1, 1, 0, 2, 1, 2, 1])])}
+00849
+['3', '0.30808823529411766', '0.48', '0.03308823529411765', '0.0675']
+['2', '0.30661764705882355', '0.53625', '0.025735294117647058', '0.045']
+['0', '0.6985294117647058', '0.50875', '0.016176470588235296', '0.0275']
+{'instances': Instances(num_instances=4, image_height=800, image_width=1360, fields=[pred_boxes: Boxes(tensor([[ 960.9221,  414.4181,  991.4876,  442.6185],
+        [1234.0564,  451.2213, 1253.4137,  475.6083],
+        [ 841.9030,  476.5063,  855.4323,  487.1248],
+        [ 848.1479,  466.8897,  861.7078,  477.2703]])), scores: tensor([0.9320, 0.1381, 0.0564, 0.0555]), pred_classes: tensor([1, 3, 2, 2])])}
+00845
+['1', '0.7169117647058824', '0.535', '0.022794117647058822', '0.035']
+{'instances': Instances(num_instances=10, image_height=800, image_width=1360, fields=[pred_boxes: Boxes(tensor([[ 285.7200,  424.1657,  361.4552,  501.3279],
+        [ 714.2097,  461.5786,  733.8589,  475.9377],
+        [ 614.9563,  479.2954,  631.9065,  494.6289],
+        [ 716.1043,  474.7361,  733.8278,  489.2179],
+        [ 976.7470,  386.7130,  991.6003,  406.1761],
+        [ 731.3577,  484.1447,  746.3557,  498.9533],
+        [ 637.2345,  477.6608,  653.0365,  493.4820],
+        [ 713.7093,  481.7400,  728.6781,  494.6577],
+        [ 643.4310,  477.4231,  657.8066,  492.8260],
+        [1104.2581,  437.2125, 1146.5889,  472.6577]])), scores: tensor([0.9868, 0.1310, 0.0939, 0.0756, 0.0737, 0.0690, 0.0626, 0.0525, 0.0522,
+        0.0511]), pred_classes: tensor([0, 2, 2, 2, 0, 2, 2, 2, 2, 3])])}
+00862
+['0', '0.2375', '0.5775', '0.05588235294117647', '0.09625']
+{'instances': Instances(num_instances=10, image_height=800, image_width=1360, fields=[pred_boxes: Boxes(tensor([[1003.9835,  397.5531, 1032.0996,  426.0314],
+        [1323.6395,  228.2650, 1358.4659,  302.4419],
+        [ 796.6744,  440.3951,  806.6198,  453.0523],
+        [ 961.1736,  401.8629,  977.1944,  417.7815],
+        [1333.8796,  301.5584, 1357.8395,  353.6502],
+        [ 909.4845,  464.7161,  931.8156,  483.6639],
+        [ 762.1430,  470.3755,  784.0954,  491.0170],
+        [ 797.2514,  440.1335,  806.9477,  452.3943],
+        [1322.5636,  228.8357, 1357.8978,  301.4846],
+        [ 801.6116,  440.7097,  810.7747,  452.4448]])), scores: tensor([0.9618, 0.8067, 0.2331, 0.1368, 0.1163, 0.0982, 0.0764, 0.0722, 0.0699,
+        0.0697]), pred_classes: tensor([0, 2, 0, 0, 0, 2, 2, 2, 3, 0])])}
+00866
+['0', '0.7477941176470588', '0.51375', '0.021323529411764706', '0.03625']
+['2', '0.9852941176470589', '0.33125', '0.025735294117647058', '0.0925']
+{'instances': Instances(num_instances=4, image_height=800, image_width=1360, fields=[pred_boxes: Boxes(tensor([[815.7636, 539.3926, 840.9441, 564.5264],
+        [813.5143, 514.1371, 839.0899, 539.3954],
+        [815.9631, 522.5558, 842.8195, 552.0246],
+        [  0.0000, 546.1664, 242.3112, 794.3601]])), scores: tensor([0.9302, 0.9228, 0.0752, 0.0711]), pred_classes: tensor([0, 0, 0, 2])])}
+00886
+['0', '0.6080882352941176', '0.68875', '0.01838235294117647', '0.03125']
+['0', '0.6073529411764705', '0.6575', '0.01911764705882353', '0.03125']
+{'instances': Instances(num_instances=10, image_height=800, image_width=1360, fields=[pred_boxes: Boxes(tensor([[1200.7212,  368.1268, 1260.2546,  423.7037],
+        [ 609.3882,  486.7115,  626.9299,  502.2021],
+        [ 290.2215,  117.1365,  316.1636,  146.2233],
+        [ 725.5931,  466.0659,  744.6992,  488.1740],
+        [1199.9855,  368.4301, 1261.2384,  422.9785],
+        [1199.9855,  368.4301, 1261.2384,  422.9785],
+        [ 332.8612,  476.4332,  354.1442,  501.8078],
+        [1226.5734,  448.8332, 1238.6605,  461.2497],
+        [ 884.0249,  437.9167,  897.3587,  455.6683],
+        [1199.4127,  368.6829, 1258.5674,  423.4867]])), scores: tensor([0.9976, 0.1327, 0.0989, 0.0740, 0.0712, 0.0662, 0.0592, 0.0523, 0.0520,
+        0.0512]), pred_classes: tensor([ 1,  2,  3,  0, 38, 76,  0,  0,  3, 56])])}
+00837
+['1', '0.9044117647058824', '0.49375', '0.04411764705882353', '0.06875']
+ 
+   
+        
+        
+        (detectron2) caic@caic:~/Downloads/train-object-detector-detectron2$ python eval.py
+[INFO]: Model Evaluate in progress
+Evaluation/labels/
+Evaluation/labels/00836.txt
+Evaluation/labels/00836.txt
+Class 0:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 1:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 2:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 3:
+True Positives: 1
+False Negatives: 0
+False Positives: 0
+Evaluation/labels/00858.txt
+Evaluation/labels/00858.txt
+Class 0:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 1:
+True Positives: 1
+False Negatives: 0
+False Positives: 0
+Class 2:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 3:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Evaluation/labels/00879.txt
+Evaluation/labels/00879.txt
+Class 0:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 1:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 2:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 3:
+True Positives: 1
+False Negatives: 1
+False Positives: 0
+Evaluation/labels/00848.txt
+Evaluation/labels/00848.txt
+Class 0:
+True Positives: 1
+False Negatives: 0
+False Positives: 0
+Class 1:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 2:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 3:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Evaluation/labels/00871.txt
+Evaluation/labels/00871.txt
+Class 0:
+True Positives: 1
+False Negatives: 1
+False Positives: 0
+Class 1:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 2:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 3:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Evaluation/labels/00899.txt
+Evaluation/labels/00899.txt
+Class 0:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 1:
+True Positives: 1
+False Negatives: 0
+False Positives: 0
+Class 2:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 3:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Evaluation/labels/00829.txt
+Evaluation/labels/00829.txt
+Class 0:
+True Positives: 0
+False Negatives: 1
+False Positives: 0
+Class 1:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 2:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 3:
+True Positives: 1
+False Negatives: 0
+False Positives: 0
+Evaluation/labels/00893.txt
+Evaluation/labels/00893.txt
+Class 0:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 1:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 2:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 3:
+True Positives: 1
+False Negatives: 0
+False Positives: 0
+Evaluation/labels/00865.txt
+Evaluation/labels/00865.txt
+Class 0:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 1:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 2:
+True Positives: 0
+False Negatives: 1
+False Positives: 0
+Class 3:
+True Positives: 1
+False Negatives: 0
+False Positives: 0
+Evaluation/labels/00854.txt
+Evaluation/labels/00854.txt
+Class 0:
+True Positives: 1
+False Negatives: 0
+False Positives: 0
+Class 1:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 2:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 3:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Evaluation/labels/00851.txt
+Evaluation/labels/00851.txt
+Class 0:
+True Positives: 1
+False Negatives: 0
+False Positives: 0
+Class 1:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 2:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 3:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Evaluation/labels/00891.txt
+Evaluation/labels/00891.txt
+Class 0:
+True Positives: 1
+False Negatives: 1
+False Positives: 0
+Class 1:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 2:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 3:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Evaluation/labels/00886.txt
+Evaluation/labels/00886.txt
+Class 0:
+True Positives: 1
+False Negatives: 1
+False Positives: 0
+Class 1:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 2:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 3:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Evaluation/labels/00866.txt
+Evaluation/labels/00866.txt
+Class 0:
+True Positives: 1
+False Negatives: 0
+False Positives: 0
+Class 1:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 2:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 3:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Evaluation/labels/00869.txt
+Evaluation/labels/00869.txt
+Class 0:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 1:
+True Positives: 1
+False Negatives: 1
+False Positives: 0
+Class 2:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 3:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Evaluation/labels/00887.txt
+Evaluation/labels/00887.txt
+Class 0:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 1:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 2:
+True Positives: 0
+False Negatives: 1
+False Positives: 0
+Class 3:
+True Positives: 0
+False Negatives: 0
+False Positives: 1
+Evaluation/labels/00831.txt
+Evaluation/labels/00831.txt
+Class 0:
+True Positives: 1
+False Negatives: 0
+False Positives: 0
+Class 1:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 2:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 3:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Evaluation/labels/00835.txt
+Evaluation/labels/00835.txt
+Class 0:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 1:
+True Positives: 1
+False Negatives: 0
+False Positives: 0
+Class 2:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 3:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Evaluation/labels/00898.txt
+Evaluation/labels/00898.txt
+Class 0:
+True Positives: 1
+False Negatives: 1
+False Positives: 0
+Class 1:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 2:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 3:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Evaluation/labels/00850.txt
+Evaluation/labels/00850.txt
+Class 0:
+True Positives: 1
+False Negatives: 0
+False Positives: 0
+Class 1:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 2:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 3:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Evaluation/labels/00857.txt
+Evaluation/labels/00857.txt
+Class 0:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 1:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 2:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 3:
+True Positives: 1
+False Negatives: 1
+False Positives: 0
+Evaluation/labels/00823.txt
+Evaluation/labels/00823.txt
+Class 0:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 1:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 2:
+True Positives: 1
+False Negatives: 1
+False Positives: 0
+Class 3:
+True Positives: 0
+False Negatives: 1
+False Positives: 0
+Evaluation/labels/00828.txt
+Evaluation/labels/00828.txt
+Class 0:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 1:
+True Positives: 1
+False Negatives: 0
+False Positives: 0
+Class 2:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 3:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Evaluation/labels/00889.txt
+Evaluation/labels/00889.txt
+Class 0:
+True Positives: 0
+False Negatives: 1
+False Positives: 0
+Class 1:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 2:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 3:
+True Positives: 1
+False Negatives: 0
+False Positives: 0
+Evaluation/labels/00882.txt
+Evaluation/labels/00882.txt
+Class 0:
+True Positives: 1
+False Negatives: 0
+False Positives: 0
+Class 1:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 2:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 3:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Evaluation/labels/00839.txt
+Evaluation/labels/00839.txt
+Class 0:
+True Positives: 1
+False Negatives: 3
+False Positives: 0
+Class 1:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 2:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 3:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Evaluation/labels/00827.txt
+Evaluation/labels/00827.txt
+Class 0:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 1:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 2:
+True Positives: 0
+False Negatives: 1
+False Positives: 0
+Class 3:
+True Positives: 1
+False Negatives: 0
+False Positives: 0
+Evaluation/labels/00864.txt
+Evaluation/labels/00864.txt
+Class 0:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 1:
+True Positives: 0
+False Negatives: 1
+False Positives: 0
+Class 2:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 3:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Evaluation/labels/00841.txt
+Evaluation/labels/00841.txt
+Class 0:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 1:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 2:
+True Positives: 1
+False Negatives: 0
+False Positives: 0
+Class 3:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Evaluation/labels/00863.txt
+Evaluation/labels/00863.txt
+Class 0:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 1:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 2:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 3:
+True Positives: 0
+False Negatives: 2
+False Positives: 0
+Evaluation/labels/00894.txt
+Evaluation/labels/00894.txt
+Class 0:
+True Positives: 0
+False Negatives: 2
+False Positives: 0
+Class 1:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 2:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 3:
+True Positives: 1
+False Negatives: 0
+False Positives: 0
+Evaluation/labels/00824.txt
+Evaluation/labels/00824.txt
+Class 0:
+True Positives: 1
+False Negatives: 0
+False Positives: 0
+Class 1:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 2:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 3:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Evaluation/labels/00884.txt
+Evaluation/labels/00884.txt
+Class 0:
+True Positives: 1
+False Negatives: 1
+False Positives: 0
+Class 1:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 2:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 3:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Evaluation/labels/00876.txt
+Evaluation/labels/00876.txt
+Class 0:
+True Positives: 1
+False Negatives: 1
+False Positives: 0
+Class 1:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 2:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 3:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Evaluation/labels/00846.txt
+Evaluation/labels/00846.txt
+Class 0:
+True Positives: 1
+False Negatives: 1
+False Positives: 0
+Class 1:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 2:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 3:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Evaluation/labels/00844.txt
+Evaluation/labels/00844.txt
+Class 0:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 1:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 2:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 3:
+True Positives: 1
+False Negatives: 0
+False Positives: 0
+Evaluation/labels/00837.txt
+Evaluation/labels/00837.txt
+Class 0:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 1:
+True Positives: 1
+False Negatives: 0
+False Positives: 0
+Class 2:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 3:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Evaluation/labels/00872.txt
+Evaluation/labels/00872.txt
+Class 0:
+True Positives: 1
+False Negatives: 1
+False Positives: 0
+Class 1:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 2:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 3:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Evaluation/labels/00855.txt
+Evaluation/labels/00855.txt
+Class 0:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 1:
+True Positives: 1
+False Negatives: 0
+False Positives: 0
+Class 2:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 3:
+True Positives: 0
+False Negatives: 1
+False Positives: 0
+Evaluation/labels/00860.txt
+Evaluation/labels/00860.txt
+Class 0:
+True Positives: 1
+False Negatives: 0
+False Positives: 0
+Class 1:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 2:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 3:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Evaluation/labels/00885.txt
+Evaluation/labels/00885.txt
+Class 0:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 1:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 2:
+True Positives: 0
+False Negatives: 1
+False Positives: 0
+Class 3:
+True Positives: 1
+False Negatives: 0
+False Positives: 0
+Evaluation/labels/00896.txt
+Evaluation/labels/00896.txt
+Class 0:
+True Positives: 1
+False Negatives: 0
+False Positives: 0
+Class 1:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 2:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 3:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Evaluation/labels/00897.txt
+Evaluation/labels/00897.txt
+Class 0:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 1:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 2:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 3:
+True Positives: 0
+False Negatives: 1
+False Positives: 0
+Evaluation/labels/00870.txt
+Evaluation/labels/00870.txt
+Class 0:
+True Positives: 1
+False Negatives: 1
+False Positives: 0
+Class 1:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 2:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 3:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Evaluation/labels/00842.txt
+Evaluation/labels/00842.txt
+Class 0:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 1:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 2:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 3:
+True Positives: 1
+False Negatives: 0
+False Positives: 0
+Evaluation/labels/00845.txt
+Evaluation/labels/00845.txt
+Class 0:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 1:
+True Positives: 1
+False Negatives: 0
+False Positives: 0
+Class 2:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 3:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Evaluation/labels/00834.txt
+Evaluation/labels/00834.txt
+Class 0:
+True Positives: 1
+False Negatives: 0
+False Positives: 0
+Class 1:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 2:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 3:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Evaluation/labels/00859.txt
+Evaluation/labels/00859.txt
+Class 0:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 1:
+True Positives: 1
+False Negatives: 0
+False Positives: 0
+Class 2:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 3:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Evaluation/labels/00867.txt
+Evaluation/labels/00867.txt
+Class 0:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 1:
+True Positives: 1
+False Negatives: 1
+False Positives: 0
+Class 2:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 3:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Evaluation/labels/00868.txt
+Evaluation/labels/00868.txt
+Class 0:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 1:
+True Positives: 0
+False Negatives: 2
+False Positives: 0
+Class 2:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 3:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Evaluation/labels/00862.txt
+Evaluation/labels/00862.txt
+Class 0:
+True Positives: 1
+False Negatives: 0
+False Positives: 0
+Class 1:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 2:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 3:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Evaluation/labels/00853.txt
+Evaluation/labels/00853.txt
+Class 0:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 1:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 2:
+True Positives: 0
+False Negatives: 2
+False Positives: 0
+Class 3:
+True Positives: 1
+False Negatives: 0
+False Positives: 0
+Evaluation/labels/00888.txt
+Evaluation/labels/00888.txt
+Class 0:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 1:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 2:
+True Positives: 1
+False Negatives: 0
+False Positives: 0
+Class 3:
+True Positives: 0
+False Negatives: 1
+False Positives: 0
+Evaluation/labels/00895.txt
+Evaluation/labels/00895.txt
+Class 0:
+True Positives: 1
+False Negatives: 1
+False Positives: 0
+Class 1:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 2:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 3:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Evaluation/labels/00849.txt
+Evaluation/labels/00849.txt
+Class 0:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 1:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 2:
+True Positives: 0
+False Negatives: 1
+False Positives: 0
+Class 3:
+True Positives: 1
+False Negatives: 0
+False Positives: 0
+Evaluation/labels/00825.txt
+Evaluation/labels/00825.txt
+Class 0:
+True Positives: 1
+False Negatives: 0
+False Positives: 0
+Class 1:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 2:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 3:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Evaluation/labels/00838.txt
+Evaluation/labels/00838.txt
+Class 0:
+True Positives: 1
+False Negatives: 1
+False Positives: 0
+Class 1:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 2:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 3:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Evaluation/labels/00874.txt
+Evaluation/labels/00874.txt
+Class 0:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 1:
+True Positives: 1
+False Negatives: 0
+False Positives: 0
+Class 2:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 3:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Evaluation/labels/00852.txt
+Evaluation/labels/00852.txt
+Class 0:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 1:
+True Positives: 1
+False Negatives: 0
+False Positives: 0
+Class 2:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 3:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Evaluation/labels/00833.txt
+Evaluation/labels/00833.txt
+Class 0:
+True Positives: 1
+False Negatives: 0
+False Positives: 0
+Class 1:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 2:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 3:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Evaluation/labels/00881.txt
+Evaluation/labels/00881.txt
+Class 0:
+True Positives: 1
+False Negatives: 1
+False Positives: 0
+Class 1:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 2:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+Class 3:
+True Positives: 0
+False Negatives: 0
+False Positives: 0
+{'image_name': 'Total', 'Class-id': 'All Images', 'TP': 56, 'FP': 1, 'FN': 40, 'Precision': 0.9824561403508771, 'Recall': 0.5833333333333334, 'F1': 0.7320261437908496}
+
+
+
