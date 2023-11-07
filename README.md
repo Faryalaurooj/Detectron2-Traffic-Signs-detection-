@@ -24,6 +24,44 @@ You need to download a dataset in yolo format , i used this link to download the
 https://www.kaggle.com/datasets/valentynsichkar/traffic-signs-dataset-in-yolo-format
 ```
 
+The data is in this format 
+    """
+    annotations should be provided in yolo format, this is: 
+            class, xc, yc, w, h
+    data needs to follow this structure:
+    
+    data-dir
+    ----- train
+    --------- imgs
+    ------------ filename0001.jpg
+    ------------ filename0002.jpg
+    ------------ ....
+    --------- anns
+    ------------ filename0001.txt
+    ------------ filename0002.txt
+    ------------ ....
+    ----- val
+    --------- imgs
+    ------------ filename0001.jpg
+    ------------ filename0002.jpg
+    ------------ ....
+    --------- anns
+    ------------ filename0001.txt
+    ------------ filename0002.txt
+    ------------ ....
+    
+    """
+
+Make a class names file if you are using any other data with any other classes. In this repo the classes are 
+
+[10/27 01:25:19 d2.data.build]: Distribution of instances among all 4 categories:
+|  category   | #instances   |  category  | #instances   |  category  | #instances   |
+|:-----------:|:-------------|:----------:|:-------------|:----------:|:-------------|
+| prohibitory | 557          |   danger   | 219          | mandatory  | 163          |
+|    othe     | 274          |            |              |            |              |
+|    total    | 1213         |            |              |            |              |
+
+
 # Run training 
 Use following command if you are training on your own machine gpu (in train.py and util.py select device as cuda on all places)
 
