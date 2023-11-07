@@ -1,6 +1,12 @@
 # train-object-detector-detectron2
 In this repo, we will train detectron2 model on a custom dataset and evaluate the model performance. Detectron2 is a platform for object detection, segmentation and other visual recognition tasks. We will evaluate its perfromance as a detection model. 
 
+![inbox_3400968_20ca377934c5ed5f8c1e4272c838b01a_ts_detections](https://github.com/Faryalaurooj/Detectron2-Traffic-Signs-detection-/assets/138756263/c669d87f-499d-4aab-b10d-5b6b33afdd49)
+
+![Figure_1](https://github.com/Faryalaurooj/Detectron2-Traffic-Signs-detection-/assets/138756263/cff3283b-2af0-428e-8932-ab0e2f1142d2)
+
+
+
 # Quick Start
 
 ## install requirements
